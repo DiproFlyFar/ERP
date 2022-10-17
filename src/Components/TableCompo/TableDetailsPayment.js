@@ -9,35 +9,103 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { DarkmodeEnable } from "../../App";
 
-function Row({ row, arr }) {
+function Row({ row }) {
   const [open, setOpen] = useState(false);
-  const [debitOpen, setDebitOpen] = useState(false);
+
   const { isDark } = useContext(DarkmodeEnable);
-  const properties = Object.keys(row);
+
   return (
     <React.Fragment>
       <TableRow className={`${isDark ? "t_body_dark" : "t_body"}`}>
-        {properties.map((property, index) => (
-          <TableCell
-            component="th"
-            scope="row"
-            align="center"
-            sx={{
-              color: `${isDark ? "white" : "#003566"}`,
-            }}
-          >
-            {row[properties[index]]}
-          </TableCell>
-        ))}
+        <TableCell
+          component="th"
+          scope="row"
+          align="center"
+          sx={{
+            color: `${isDark ? "white" : "#003566"}`,
+          }}
+        >
+          {row.id}
+        </TableCell>
+        <TableCell
+          component="th"
+          scope="row"
+          align="center"
+          sx={{
+            color: `${isDark ? "white" : "#003566"}`,
+          }}
+        >
+          {row.agentId}
+        </TableCell>
+        <TableCell
+          component="th"
+          scope="row"
+          align="center"
+          sx={{
+            color: `${isDark ? "white" : "#003566"}`,
+          }}
+        >
+          {row.reciever}
+        </TableCell>
+        <TableCell
+          component="th"
+          scope="row"
+          align="center"
+          sx={{
+            color: `${isDark ? "white" : "#003566"}`,
+          }}
+        >
+          {row.sender}
+        </TableCell>
+        <TableCell
+          component="th"
+          scope="row"
+          align="center"
+          sx={{
+            color: `${isDark ? "white" : "#003566"}`,
+          }}
+        >
+          {row.transactionId}
+        </TableCell>
+        <TableCell
+          component="th"
+          scope="row"
+          align="center"
+          sx={{
+            color: `${isDark ? "white" : "#003566"}`,
+          }}
+        >
+          {row.amount}
+        </TableCell>
+        <TableCell
+          component="th"
+          scope="row"
+          align="center"
+          sx={{
+            color: `${isDark ? "white" : "#003566"}`,
+          }}
+        >
+          {row.dateTime}
+        </TableCell>
+        <TableCell
+          component="th"
+          scope="row"
+          align="center"
+          sx={{
+            color: `${isDark ? "white" : "#003566"}`,
+          }}
+        >
+          {row.status}
+        </TableCell>
+
         <TableCell align="center">
           <IconButton
             aria-label="expand row"
             size="small"
             onClick={() => {
-              setDebitOpen(false);
               setOpen(!open);
             }}
             sx={{ color: `${isDark ? "white" : "#003566"}` }}
@@ -50,11 +118,11 @@ function Row({ row, arr }) {
                   textAlign: "center",
                   width: "100px",
                   fontSize: "15px",
-                  background: "#003566",
-                  color: `${isDark || open ? "white" : "#003566"}`,
+
+                  color: `${isDark ? "white" : "#003566"}`,
                 }}
               >
-                Credit
+                Hide Details
               </p>
             ) : (
               <p
@@ -63,12 +131,11 @@ function Row({ row, arr }) {
                   textAlign: "center",
                   width: "100px",
                   fontSize: "15px",
-                  background: "#D9D9D9",
+                  color: `${isDark ? "white" : "#003566"}`,
                   fontWeight: "600",
-                  color: "#003566",
                 }}
               >
-                Credit
+                View Details
               </p>
             )}
           </IconButton>
@@ -81,70 +148,163 @@ function Row({ row, arr }) {
             paddingTop: 0,
           }}
           className={`${isDark ? "accordion_dark" : "accordion_light"}`}
-          colSpan={7}
+          colSpan={9}
         >
           <Collapse
-            in={open || debitOpen}
+            in={open}
             timeout="auto"
             unmountOnExit
             sx={{ width: "100%", marginBottom: "30px" }}
           >
             {/* Collapsed Detail section with input textfields */}
             <Box sx={{ margin: 3 }}>
-              {debitOpen ? (
+              <Box>
                 <Typography
                   sx={{
+                    fontSize: "20px",
                     color: `${isDark ? "white" : "#003566"}`,
-                    marginBottom: "10px",
                     fontWeight: "600",
                   }}
                 >
-                  Debit Balance
+                  Reff #{row.ref}
                 </Typography>
-              ) : (
-                <Typography
+                <Box
                   sx={{
-                    color: `${isDark ? "white" : "#003566"}`,
-                    marginBottom: "10px",
-                    fontWeight: "600",
+                    display: "flex",
+                    width: "30%",
+                    justifyContent: "space-between",
                   }}
                 >
-                  Credit Balance
-                </Typography>
-              )}
+                  <Typography
+                    sx={{
+                      fontWeight: "bold",
+                      color: `${isDark ? "white" : "#003566"}`,
+                    }}
+                  >
+                    Type: {row.paymentmethod}
+                  </Typography>
+                  <Typography sx={{ fontWeight: "bold" }}>
+                    Agent ID: {row.agentId}
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "50px",
+                    color: `${isDark ? "white" : "#003566"}`,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      width: "70%",
+                      justifyContent: "space-between",
+                      color: `${isDark ? "white" : "#003566"}`,
+                    }}
+                  >
+                    <div>
+                      <Typography sx={{}}>
+                        Transaction ID:{" "}
+                        <span
+                          style={{
+                            marginLeft: "100px",
+                            fontWeight: "600",
+                          }}
+                        >
+                          {row.transactionId}
+                        </span>{" "}
+                      </Typography>
+                      <Typography sx={{}}>
+                        Transaction Amount:{" "}
+                        <span
+                          style={{
+                            marginLeft: "100px",
+                            fontWeight: "600",
+                          }}
+                        >
+                          {row.amount}
+                        </span>
+                      </Typography>
+                      <Typography sx={{}}>
+                        Transaction Date:{" "}
+                        <span
+                          style={{
+                            marginLeft: "100px",
+                            fontWeight: "600",
+                          }}
+                        >
+                          {row.dateTime}
+                        </span>
+                      </Typography>
+                    </div>
+                    <div>
+                      <Typography sx={{}}>
+                        Reciver Account Name :{" "}
+                        <span
+                          style={{
+                            marginLeft: "100px",
+                            fontWeight: "600",
+                          }}
+                        >
+                          {row.reciever}
+                        </span>{" "}
+                      </Typography>
+                      <Typography sx={{}}>
+                        Sender Account Name{" "}
+                        <span
+                          style={{
+                            marginLeft: "100px",
+                            fontWeight: "600",
+                          }}
+                        >
+                          {row.sender}
+                        </span>
+                      </Typography>
+                    </div>
+                  </Box>
 
-              <Grid container spacing={2.5}>
-                {properties.map((p, index) => (
-                  <Grid item xs={2.4}>
-                    <TextField
-                      placeholder={row[properties[index]]}
-                      id="outlined-basic"
-                      variant="outlined"
-                      size="small"
-                      className={`${isDark ? "input_dark" : "input_light"}`}
-                      sx={{
-                        "& fieldset": { border: "none" },
-                      }}
-                    />
-                  </Grid>
-                ))}
-              </Grid>
+                  <Box
+                    sx={{
+                      textDecoration: "underline",
+                      fontWeight: "600",
+                      fontSize: "17px",
+                    }}
+                  >
+                    View Attachment
+                  </Box>
+                </Box>
+              </Box>
+
               <Box
                 sx={{
-                  width: "17.6%",
+                  display: "flex",
+                  width: "22%",
                   float: "right",
                   marginTop: "30px",
-                  background: "#70A5D8",
+
+                  justifyContent: "space-between",
                 }}
               >
                 <Button
                   sx={{
                     background: "#70A5D8",
-                    width: "100%",
+                    width: "45%",
                     color: "white",
+                    borderRadius: "0",
                   }}
                 >
-                  Save
+                  Approve
+                </Button>
+                <Button
+                  sx={{
+                    background: "#DC143C",
+                    width: "45%",
+                    color: "white",
+                    borderRadius: "0",
+                  }}
+                >
+                  Reject
                 </Button>
               </Box>
             </Box>
@@ -158,8 +318,8 @@ const TableDetailsPayment = ({ rows, arr }) => {
   return (
     <Box
       sx={{
-        width: "95%",
-        height: "100vh",
+        width: "100%",
+        minHeight: "100vh",
       }}
     >
       <TableContainer
@@ -171,7 +331,7 @@ const TableDetailsPayment = ({ rows, arr }) => {
         }}
       >
         <Table aria-label="collapsible table">
-          <TableHead sx={{ background: "#70A5D8" }}>
+          {/* <TableHead sx={{ background: "#70A5D8" }}>
             <TableRow sx={{ backgroundColor: "#70A5D8" }}>
               {arr.map((tc) => (
                 <TableCell
@@ -181,6 +341,76 @@ const TableDetailsPayment = ({ rows, arr }) => {
                   {tc}
                 </TableCell>
               ))}
+            </TableRow>
+          </TableHead> */}
+          <TableHead>
+            <TableRow sx={{ backgroundColor: "#70A5D8" }}>
+              <TableCell
+                sx={{ color: "white", p: "10px", textAlign: "center" }}
+              >
+                Refference
+              </TableCell>
+              <TableCell
+                sx={{ color: "white", p: "10px", textAlign: "center" }}
+              >
+                Agent ID
+              </TableCell>
+              <TableCell
+                sx={{ color: "white", p: "10px", textAlign: "center" }}
+              >
+                Reciver Account
+              </TableCell>
+              <TableCell
+                sx={{ color: "white", p: "10px", textAlign: "center" }}
+              >
+                Sender Acc
+              </TableCell>
+              <TableCell
+                sx={{ color: "white", p: "10px", textAlign: "center" }}
+                colSpan={3}
+              >
+                Transaction{" "}
+              </TableCell>
+              <TableCell
+                sx={{ color: "white", p: "10px", textAlign: "center" }}
+              >
+                Status
+              </TableCell>
+              <TableCell
+                sx={{ color: "white", p: "10px", textAlign: "center" }}
+                colSpan={3}
+              >
+                &nbsp;&nbsp;&nbsp;&nbsp;Action
+              </TableCell>
+            </TableRow>
+            <TableRow sx={{ background: "#70A5D8" }}>
+              <TableCell align="center" colSpan={4}></TableCell>
+              <TableCell
+                align="center"
+                colSpan={1}
+                sx={{
+                  background: "#003566",
+                  color: "white",
+                  textAlign: "center",
+                }}
+              >
+                ID
+              </TableCell>
+              <TableCell
+                align="center"
+                colSpan={1}
+                sx={{ background: "#003566" }}
+              >
+                <span style={{ color: "white" }}>Amount</span>
+              </TableCell>
+              <TableCell
+                align="center"
+                colSpan={1}
+                sx={{ background: "#003566" }}
+              >
+                <span style={{ color: "white" }}>Date</span>
+              </TableCell>
+              <TableCell align="center" colSpan={3}></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
