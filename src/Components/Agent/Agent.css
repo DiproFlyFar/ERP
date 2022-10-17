@@ -1,0 +1,17 @@
+.selected_tab {
+  background: #003566 !important;
+  padding: 5px;
+  color: white !important;
+  border-radius: 0 !important;
+  border: 1px solid #003566;
+  margin-right: 10px;
+  
+}
+.not_selected_tab {
+  background: white !important;
+  padding: 5px;
+  color: #003566 !important;
+  border-radius: 0 !important;
+  border: 1px solid #003566 !important;
+  margin-right: 10px;
+}
