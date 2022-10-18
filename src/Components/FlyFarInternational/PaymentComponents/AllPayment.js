@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { DarkmodeEnable } from "../../../App";
 import TableDetailsPayment from "../../TableCompo/TableDetailsPayment";
 import TablePayment from "../../TableCompo/TablePayment";
-
+import { useQuery } from "react-query"
 const AllPayment = () => {
   const { isDark } = React.useContext(DarkmodeEnable);
   const allPaymentArr = [
@@ -20,15 +20,22 @@ const AllPayment = () => {
   ];
   const [open, setOpen] = React.useState(false);
 
-  const [paymentData, setPaymentData] = useState([]);
-  useEffect(() => {
-    fetch(
-      "https://api.flyfarint.com/v.1.0.0/Admin/DepositRequest/allRequest.php?all"
-    )
-      .then((res) => res.json())
-      .then((data) => setPaymentData(data));
-  }, []);
+  // const [paymentData, setPaymentData] = useState([]);
+  // useEffect(() => {
+  //   fetch(
+  //     "https://api.flyfarint.com/v.1.0.0/Admin/DepositRequest/allRequest.php?all"
+  //   )
+  //     .then((res) => res.json())
+  //     .then((data) => setPaymentData(data));
+  // }, []);
 
+  // React Query
+  const { isLoading, data } = useQuery("allPaymentData", () => { 
+   return fetch(
+      "https://api.flyfarint.com/v.1.0.0/Admin/DepositRequest/allRequest.php?all"
+    ) .then((res) => res.json())
+     
+  })
   return (
     <Box
       sx={{
@@ -37,11 +44,15 @@ const AllPayment = () => {
         minHeight: "100vh",
       }}
     >
+{      console.log("Data by react query",data)}
+ 
       <TableDetailsPayment
-        rows={paymentData}
+        rows={data}
         arr={allPaymentArr}
         details="vendorDetails"
+        isLoading = {isLoading}
       ></TableDetailsPayment>
+   
     </Box>
   );
 };

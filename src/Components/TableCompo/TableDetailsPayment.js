@@ -11,14 +11,17 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button, Grid, Typography } from "@mui/material";
 import { DarkmodeEnable } from "../../App";
+import { CircularProgress } from "@material-ui/core";
 
-function Row({ row }) {
+function Row({ row, isLoading }) {
   const [open, setOpen] = useState(false);
 
   const { isDark } = useContext(DarkmodeEnable);
 
   return (
     <React.Fragment>
+
+
       <TableRow className={`${isDark ? "t_body_dark" : "t_body"}`}>
         <TableCell
           component="th"
@@ -141,6 +144,8 @@ function Row({ row }) {
           </IconButton>
         </TableCell>
       </TableRow>
+
+
       <TableRow>
         <TableCell
           style={{
@@ -250,7 +255,7 @@ function Row({ row }) {
                           {row.reciever}
                         </span>{" "}
                       </Typography>
-                      <Typography sx={{}}>
+                      <Typography>
                         Sender Account Name{" "}
                         <span
                           style={{
@@ -314,7 +319,7 @@ function Row({ row }) {
     </React.Fragment>
   );
 }
-const TableDetailsPayment = ({ rows, arr }) => {
+const TableDetailsPayment = ({ rows, arr, isLoading }) => {
   return (
     <Box
       sx={{
@@ -331,20 +336,9 @@ const TableDetailsPayment = ({ rows, arr }) => {
         }}
       >
         <Table aria-label="collapsible table">
-          {/* <TableHead sx={{ background: "#70A5D8" }}>
-            <TableRow sx={{ backgroundColor: "#70A5D8" }}>
-              {arr.map((tc) => (
-                <TableCell
-                  align="center"
-                  sx={{ color: "white", p: "10px", textAlign: "center" }}
-                >
-                  {tc}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead> */}
+
           <TableHead>
-            <TableRow sx={{ backgroundColor: "#70A5D8" }}>
+            <TableRow sx={{ backgroundColor: "#70A5D8", border: "0" }}>
               <TableCell
                 sx={{ color: "white", p: "10px", textAlign: "center" }}
               >
@@ -383,7 +377,7 @@ const TableDetailsPayment = ({ rows, arr }) => {
                 &nbsp;&nbsp;&nbsp;&nbsp;Action
               </TableCell>
             </TableRow>
-            <TableRow sx={{ background: "#70A5D8" }}>
+            <TableRow sx={{ background: "#70A5D8", }}>
               <TableCell align="center" colSpan={4}></TableCell>
               <TableCell
                 align="center"
@@ -413,10 +407,17 @@ const TableDetailsPayment = ({ rows, arr }) => {
               <TableCell align="center" colSpan={3}></TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <Row key={row.id} row={row} arr={arr} />
+
+          <TableBody sx={{background:"red"}}>
+            <Box sx={{  background: "green", display: "flex", justifyContent: "center",mt:"20px" }} spacing={2} direction="row">
+
+              <CircularProgress color="inherit" />
+            </Box>
+          
+            {rows?.map((row) => (
+              <Row key={row.id} row={row} arr={arr} isLoading={isLoading} />
             ))}
+
           </TableBody>
         </Table>
       </TableContainer>
