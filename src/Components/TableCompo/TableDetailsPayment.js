@@ -92,7 +92,7 @@ function Row({ row, isLoading }) {
               color: `${isDark ? "white" : "#003566"}`,
             }}
           >
-            {row.dateTime}
+            {row.dateTime.substr(0, 10)}
           </TableCell>
           <TableCell
             component="th"
@@ -186,12 +186,12 @@ function Row({ row, isLoading }) {
                   <Typography
                     sx={{
                       fontWeight: "bold",
-                      color: `${isDark ? "white" : "#003566"}`,
+                      color: `${isDark ? "white" : "#252733"}`,
                     }}
                   >
                     Type: {row.paymentmethod}
                   </Typography>
-                  <Typography sx={{ fontWeight: "bold" }}>
+                  <Typography sx={{ fontWeight: "bold",color:`${isDark?"white":"#252733"}` }}>
                     Agent ID: {row.agentId}
                   </Typography>
                 </Box>
@@ -211,64 +211,81 @@ function Row({ row, isLoading }) {
                       color: `${isDark ? "white" : "#003566"}`,
                     }}
                   >
-                    <div>
-                      <Typography sx={{}}>
-                        Transaction ID:{" "}
+                    <div style={{width:"50%"}}>
+                      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                        <span style={{width:"50%"}}>     Transaction ID:</span>
+
                         <span
                           style={{
                             marginLeft: "100px",
                             fontWeight: "600",
+                            textAlign:"left",
+                            width:"50%",
+                            
                           }}
                         >
                           {row.transactionId}
                         </span>{" "}
-                      </Typography>
-                      <Typography sx={{}}>
-                        Transaction Amount:{" "}
+                      </Box>
+                      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                      <span style={{width:"50%"}}>  Transaction Amount:{" "}</span>
                         <span
                           style={{
                             marginLeft: "100px",
                             fontWeight: "600",
+                            textAlign:"left",
+                            width:"50%",
+                          
                           }}
                         >
-                          {row.amount}
+                          {row.amount} 
                         </span>
-                      </Typography>
-                      <Typography sx={{}}>
-                        Transaction Date:{" "}
+                      </Box>
+                      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                        <span  style={{width:"50%"}}>    Transaction Date:{" "}</span>
+
                         <span
                           style={{
                             marginLeft: "100px",
                             fontWeight: "600",
+                            textAlign:"left",
+                            width:"50%",
+            
                           }}
                         >
-                          {row.dateTime}
+                        {row.dateTime.substr(0, 10)}
                         </span>
-                      </Typography>
+                      </Box>
                     </div>
                     <div>
-                      <Typography sx={{}}>
-                        Reciver Account Name :{" "}
+                    <Box sx={{ display: "flex", justifyContent: "space-between",width:"100%" }}>
+                        <span  >Reciver Account Name :</span>
+
                         <span
                           style={{
                             marginLeft: "100px",
                             fontWeight: "600",
+                            textAlign:"left",
                           }}
                         >
                           {row.reciever}
-                        </span>{" "}
-                      </Typography>
-                      <Typography>
-                        Sender Account Name{" "}
+                        </span>
+                      </Box>
+                    <Box sx={{ display: "flex", justifyContent: "space-between",width:"100%" }}>
+                        <span  >Sender Account Name :</span>
+
                         <span
                           style={{
                             marginLeft: "100px",
                             fontWeight: "600",
+                            textAlign:"left",
                           }}
                         >
                           {row.sender}
                         </span>
-                      </Typography>
+                      </Box>
+                  
+                     
                     </div>
                   </Box>
 
