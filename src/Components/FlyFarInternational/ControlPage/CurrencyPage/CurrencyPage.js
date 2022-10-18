@@ -14,7 +14,7 @@ const CurrencyPage = () => {
               fontWeight: "500",
             }}
           >
-            Currency Converter
+            Currency Converter 
           </Typography>
         </Box>
         <Grid container spacing={2}>
