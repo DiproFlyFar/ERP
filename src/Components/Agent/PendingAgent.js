@@ -3,15 +3,15 @@ import React from "react";
 import { DarkmodeEnable } from "../../App";
 import "./Agent.css";
 
-const Pending = () => {
+const PendingAgent = () => {
     const { isDark } = React.useContext(DarkmodeEnable);
     return (
         <Box sx={{ width: "99%" }}>
 
-            Pending
+            Pending Agent
 
         </Box>
     );
 };
 
-export default Pending;
+export default PendingAgent;

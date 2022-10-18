@@ -428,7 +428,7 @@ const TableDetailsPayment = ({ rows, arr, isLoading }) => {
 
 
             {rows?.map((row) => (
-              location.pathname === "/manageWebsite/www.flyfarint.com/payment/all" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/pending" && row.status === "pending" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : null
+              location.pathname === "/manageWebsite/www.flyfarint.com/payment/all" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/pending" && row.status === "pending" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/approved" && row.status === "approved" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : null
               // <Row key={row.id} row={row} arr={arr} isLoading={isLoading} />
             ))}
 
