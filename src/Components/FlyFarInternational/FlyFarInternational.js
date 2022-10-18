@@ -50,7 +50,7 @@ const FlyFarInternational = () => {
             Home
           </NavLink>
           <NavLink
-            to="/manageWebsite/www.flyfarint.com/control"
+            to="/manageWebsite/www.flyfarint.com/control/apipage"
             className={({ isActive }) => (isActive ? "active-link" : "link")}
           >
             Control

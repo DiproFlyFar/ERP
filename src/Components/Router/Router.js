@@ -6,7 +6,7 @@ import AddBank from "../AddBank/AddBank";
 import Agent from "../Agent/Agent";
 import AllAgent from "../Agent/AllAgent";
 import Deactivate from "../Agent/Deactivate";
- 
+
 import Reject from "../Agent/Reject";
 import BankDetails from "../BankDetails/BankDetails";
 import ChartOfAccount from "../ChartOfAccount/ChartOfAccount";
@@ -65,6 +65,9 @@ import Pending from "../FlyFarInternational/PaymentComponents/Pending";
 import PendingAgent from "../Agent/PendingAgent";
 import RejectedPayment from "../FlyFarInternational/PaymentComponents/RejectedPayment";
 import IssuedDetails from "../FlyFarInternational/BookingComponents/IssuedDetails/IssuedDetails";
+import ApiPage from "../FlyFarInternational/ControlPage/ApiPage/ApiPage";
+import Airlines from "../FlyFarInternational/ControlPage/Airlines/Airlines";
+import CurrencyPage from "../FlyFarInternational/ControlPage/CurrencyPage/CurrencyPage";
 const Router = () => {
   return (
     <Box>
@@ -82,7 +85,6 @@ const Router = () => {
 
             <Route path="/bookholddata" element={<BookHoldData />} />
             <Route path="/issuedetail" element={<IssuedDetails />} />
-
 
             <Route path="/customer" element={<Customer />}>
               <Route
@@ -213,6 +215,26 @@ const Router = () => {
                   element={<Refund />}
                 ></Route>
               </Route>
+
+              {/*  control nested route */}
+              <Route
+                path="/manageWebsite/www.flyfarint.com/control"
+                element={<Control />}
+              >
+                <Route
+                  path="/manageWebsite/www.flyfarint.com/control/apipage"
+                  element={<ApiPage />}
+                ></Route>
+                <Route
+                  path="/manageWebsite/www.flyfarint.com/control/airlinepage"
+                  element={<Airlines />}
+                ></Route>
+                <Route
+                  path="/manageWebsite/www.flyfarint.com/control/currencypage"
+                  element={<CurrencyPage />}
+                ></Route>
+              </Route>
+
               <Route
                 path="/manageWebsite/www.flyfarint.com/payment"
                 element={<Payment />}
@@ -222,9 +244,18 @@ const Router = () => {
                   path="/manageWebsite/www.flyfarint.com/payment/all"
                   element={<AllPayment />}
                 ></Route>
-                <Route path="/manageWebsite/www.flyfarint.com/payment/pending" element={<Pending/>}></Route>
-                <Route path="/manageWebsite/www.flyfarint.com/payment/approved" element={<Approved/>}></Route>
-                <Route path="/manageWebsite/www.flyfarint.com/payment/cancelled" element={<RejectedPayment/>}></Route>
+                <Route
+                  path="/manageWebsite/www.flyfarint.com/payment/pending"
+                  element={<Pending />}
+                ></Route>
+                <Route
+                  path="/manageWebsite/www.flyfarint.com/payment/approved"
+                  element={<Approved />}
+                ></Route>
+                <Route
+                  path="/manageWebsite/www.flyfarint.com/payment/cancelled"
+                  element={<RejectedPayment />}
+                ></Route>
               </Route>
               <Route
                 path="/manageWebsite/www.flyfarint.com/groupFare"
@@ -251,10 +282,6 @@ const Router = () => {
               <Route
                 path="/manageWebsite/www.flyfarint.com/notifications"
                 element={<Notification />}
-              ></Route>
-              <Route
-                path="/manageWebsite/www.flyfarint.com/control"
-                element={<Control />}
               ></Route>
             </Route>
           </Route>
