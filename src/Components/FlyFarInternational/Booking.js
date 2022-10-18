@@ -41,7 +41,7 @@ const Booking = () => {
               isActive ? "active-booking-link" : "booking-link"
             }
           >
-            Issued
+            Issued on process
           </NavLink>
           <NavLink
             to="/manageWebsite/www.flyfarint.com/booking/ticketed"
