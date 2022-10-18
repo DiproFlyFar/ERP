@@ -76,7 +76,7 @@ const SearchList = () => {
           {shortValues.map((searchValue) => (
             <tr>
               <td>{searchValue?.searchId}</td>
-              <td></td>
+              <td>{searchValue?.company}</td>
               <td>{searchValue?.searchTime.slice(0, 10)}</td>
               <td>{searchValue?.searchtype}</td>
               <td>{searchValue?.DepFrom}</td>
