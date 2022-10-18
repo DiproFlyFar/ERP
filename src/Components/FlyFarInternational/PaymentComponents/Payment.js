@@ -59,11 +59,12 @@ const Payment = () => {
           {/* Select Type Section */}
           <Box>
 
-            <select name="cars" id="cars" style={{ width: "250px", padding: "10px", border: "1px solid #003566",marginRight:"25px" }}>
+            <select name="cars" id="cars" style={{ width: "250px", padding: "10px", border: "1px solid #003566", marginRight: "25px", cursor: "pointer" }}>
               <option value="volvo" color="#003566">Select Type</option>
-              <option value="saab">Saab</option>
-              <option value="mercedes">Mercedes</option>
-              <option value="audi">Audi</option>
+              <option value="all">All</option>
+              <option value="pending">Pending</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
             </select></Box>
 
         </Box>

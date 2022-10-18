@@ -20,14 +20,6 @@ const AllPayment = () => {
   ];
   const [open, setOpen] = React.useState(false);
 
-  // const [paymentData, setPaymentData] = useState([]);
-  // useEffect(() => {
-  //   fetch(
-  //     "https://api.flyfarint.com/v.1.0.0/Admin/DepositRequest/allRequest.php?all"
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => setPaymentData(data));
-  // }, []);
 
   // React Query
   const { isLoading, data } = useQuery("allPaymentData", () => { 
