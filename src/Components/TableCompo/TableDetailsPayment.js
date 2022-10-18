@@ -12,10 +12,11 @@ import Paper from "@mui/material/Paper";
 import { Button, Grid, Typography } from "@mui/material";
 import { DarkmodeEnable } from "../../App";
 import { CircularProgress } from "@material-ui/core";
+import { useLocation } from "react-router-dom";
 
 function Row({ row, isLoading }) {
   const [open, setOpen] = useState(false);
-
+  const location = useLocation();
   const { isDark } = useContext(DarkmodeEnable);
 
   return (
@@ -23,7 +24,7 @@ function Row({ row, isLoading }) {
 
 
       <TableRow className={`${isDark ? "t_body_dark" : "t_body"}`}>
-        <TableCell
+        <>   <TableCell
           component="th"
           scope="row"
           align="center"
@@ -33,116 +34,118 @@ function Row({ row, isLoading }) {
         >
           {row.id}
         </TableCell>
-        <TableCell
-          component="th"
-          scope="row"
-          align="center"
-          sx={{
-            color: `${isDark ? "white" : "#003566"}`,
-          }}
-        >
-          {row.agentId}
-        </TableCell>
-        <TableCell
-          component="th"
-          scope="row"
-          align="center"
-          sx={{
-            color: `${isDark ? "white" : "#003566"}`,
-          }}
-        >
-          {row.reciever}
-        </TableCell>
-        <TableCell
-          component="th"
-          scope="row"
-          align="center"
-          sx={{
-            color: `${isDark ? "white" : "#003566"}`,
-          }}
-        >
-          {row.sender}
-        </TableCell>
-        <TableCell
-          component="th"
-          scope="row"
-          align="center"
-          sx={{
-            color: `${isDark ? "white" : "#003566"}`,
-          }}
-        >
-          {row.transactionId}
-        </TableCell>
-        <TableCell
-          component="th"
-          scope="row"
-          align="center"
-          sx={{
-            color: `${isDark ? "white" : "#003566"}`,
-          }}
-        >
-          {row.amount}
-        </TableCell>
-        <TableCell
-          component="th"
-          scope="row"
-          align="center"
-          sx={{
-            color: `${isDark ? "white" : "#003566"}`,
-          }}
-        >
-          {row.dateTime}
-        </TableCell>
-        <TableCell
-          component="th"
-          scope="row"
-          align="center"
-          sx={{
-            color: `${isDark ? "white" : "#003566"}`,
-          }}
-        >
-          {row.status}
-        </TableCell>
-
-        <TableCell align="center">
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => {
-              setOpen(!open);
+          <TableCell
+            component="th"
+            scope="row"
+            align="center"
+            sx={{
+              color: `${isDark ? "white" : "#003566"}`,
             }}
-            sx={{ color: `${isDark ? "white" : "#003566"}` }}
           >
-            {open ? (
-              <p
-                style={{
-                  padding: "5px",
-                  fontWeight: "600",
-                  textAlign: "center",
-                  width: "100px",
-                  fontSize: "15px",
+            {row.agentId}
+          </TableCell>
+          <TableCell
+            component="th"
+            scope="row"
+            align="center"
+            sx={{
+              color: `${isDark ? "white" : "#003566"}`,
+            }}
+          >
+            {row.reciever}
+          </TableCell>
+          <TableCell
+            component="th"
+            scope="row"
+            align="center"
+            sx={{
+              color: `${isDark ? "white" : "#003566"}`,
+            }}
+          >
+            {row.sender}
+          </TableCell>
+          <TableCell
+            component="th"
+            scope="row"
+            align="center"
+            sx={{
+              color: `${isDark ? "white" : "#003566"}`,
+            }}
+          >
+            {row.transactionId}
+          </TableCell>
+          <TableCell
+            component="th"
+            scope="row"
+            align="center"
+            sx={{
+              color: `${isDark ? "white" : "#003566"}`,
+            }}
+          >
+            {row.amount}
+          </TableCell>
+          <TableCell
+            component="th"
+            scope="row"
+            align="center"
+            sx={{
+              color: `${isDark ? "white" : "#003566"}`,
+            }}
+          >
+            {row.dateTime}
+          </TableCell>
+          <TableCell
+            component="th"
+            scope="row"
+            align="center"
+            sx={{
+              color: `${isDark ? "white" : "#003566"}`,
+            }}
+          >
+            {row.status}
 
-                  color: `${isDark ? "white" : "#003566"}`,
-                }}
-              >
-                Hide Details
-              </p>
-            ) : (
-              <p
-                style={{
-                  padding: "5px",
-                  textAlign: "center",
-                  width: "100px",
-                  fontSize: "15px",
-                  color: `${isDark ? "white" : "#003566"}`,
-                  fontWeight: "600",
-                }}
-              >
-                View Details
-              </p>
-            )}
-          </IconButton>
-        </TableCell>
+          </TableCell>
+
+          <TableCell align="center">
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => {
+                setOpen(!open);
+              }}
+              sx={{ color: `${isDark ? "white" : "#003566"}` }}
+            >
+              {open ? (
+                <p
+                  style={{
+                    padding: "5px",
+                    fontWeight: "600",
+                    textAlign: "center",
+                    width: "100px",
+                    fontSize: "15px",
+
+                    color: `${isDark ? "white" : "#003566"}`,
+                  }}
+                >
+                  Hide Details
+                </p>
+              ) : (
+                <p
+                  style={{
+                    padding: "5px",
+                    textAlign: "center",
+                    width: "100px",
+                    fontSize: "15px",
+                    color: `${isDark ? "white" : "#003566"}`,
+                    fontWeight: "600",
+                  }}
+                >
+                  View Details
+                </p>
+              )}
+            </IconButton>
+          </TableCell></>
+
       </TableRow>
 
 
@@ -320,6 +323,8 @@ function Row({ row, isLoading }) {
   );
 }
 const TableDetailsPayment = ({ rows, arr, isLoading }) => {
+  const location = useLocation();
+
   return (
     <Box
       sx={{
@@ -331,10 +336,10 @@ const TableDetailsPayment = ({ rows, arr, isLoading }) => {
 
       {/* Loading Spinner */}
       {
-        isLoading&&<Box sx={{ display: "flex", justifyContent: "center", padding: "20px", position: "absolute", top: "20%", width: "100%" }} spacing={2} direction="row">
+        isLoading && <Box sx={{ display: "flex", justifyContent: "center", padding: "20px", position: "absolute", top: "20%", width: "100%" }} spacing={2} direction="row">
 
-        <CircularProgress color="inherit" />
-      </Box>
+          <CircularProgress color="inherit" />
+        </Box>
       }
       <TableContainer
         component={Paper}
@@ -423,7 +428,8 @@ const TableDetailsPayment = ({ rows, arr, isLoading }) => {
 
 
             {rows?.map((row) => (
-              <Row key={row.id} row={row} arr={arr} isLoading={isLoading} />
+              location.pathname === "/manageWebsite/www.flyfarint.com/payment/all" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/pending" && row.status === "pending" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : null
+              // <Row key={row.id} row={row} arr={arr} isLoading={isLoading} />
             ))}
 
           </TableBody>
