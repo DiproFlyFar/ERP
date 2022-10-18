@@ -64,6 +64,7 @@ import Approved from "../FlyFarInternational/PaymentComponents/Approved";
 import Pending from "../FlyFarInternational/PaymentComponents/Pending";
 import PendingAgent from "../Agent/PendingAgent";
 import RejectedPayment from "../FlyFarInternational/PaymentComponents/RejectedPayment";
+import IssuedDetails from "../FlyFarInternational/BookingComponents/IssuedDetails/IssuedDetails";
 const Router = () => {
   return (
     <Box>
@@ -80,6 +81,8 @@ const Router = () => {
             </Route>
 
             <Route path="/bookholddata" element={<BookHoldData />} />
+            <Route path="/issuedetail" element={<IssuedDetails />} />
+
 
             <Route path="/customer" element={<Customer />}>
               <Route

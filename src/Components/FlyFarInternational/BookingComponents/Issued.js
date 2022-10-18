@@ -1,9 +1,10 @@
 import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Issued = () => {
+  const navigate = useNavigate();
   const [issueData, setIssueData] = useState([]);
-
   useEffect(() => {
     const url =
       "https://api.flyfarint.com/v.1.0.0/Admin/Booking/all.php?status=Issue%20In%20Processing";
@@ -20,6 +21,77 @@ const Issued = () => {
       .then((res) => res.json())
       .then((data) => setAgentData(data[0]));
   }, [issueData[0]?.agentId]);
+
+  //  send to issue details page
+  const sendToQueuesDetails = (
+    bookingId,
+    invoiceId,
+    agentId,
+    staffId,
+    email,
+    phone,
+    PersonName,
+    pnr,
+    tripType,
+    pax,
+    adultCount,
+    childCount,
+    infantCount,
+    netCost,
+    adultCostBase,
+    childCostBase,
+    infantCostBase,
+    adultCostTax,
+    childCostTax,
+    infantCostTax,
+    grossCost,
+    baseFare,
+    Tax,
+    deptFrom,
+    airlines,
+    arriveTo,
+    gds,
+    statusType,
+    dateTime,
+    issueTime,
+    timeLimit
+  ) => {
+    navigate("/issuedetail", {
+      state: {
+        bookingId,
+        invoiceId,
+        agentId,
+        staffId,
+        email,
+        phone,
+        PersonName,
+        pnr,
+        tripType,
+        pax,
+        adultCount,
+        childCount,
+        infantCount,
+        netCost,
+        adultCostBase,
+        childCostBase,
+        infantCostBase,
+        adultCostTax,
+        childCostTax,
+        infantCostTax,
+        grossCost,
+        baseFare,
+        Tax,
+        deptFrom,
+        airlines,
+        arriveTo,
+        gds,
+        statusType,
+        dateTime,
+        issueTime,
+        timeLimit,
+      },
+    });
+  };
 
   return (
     <Box style={{ width: "97% " }}>
@@ -56,7 +128,47 @@ const Issued = () => {
                   <td>{data?.pnr}</td>
                   <td>{data?.pax}</td>
                   <td>{agentData?.company}</td>
-                  <td></td>
+                  <td>
+                    <button
+                      onClick={() =>
+                        sendToQueuesDetails(
+                          data?.BookingId,
+                          data?.invoiceId,
+                          data?.agentId,
+                          data?.staffId,
+                          data?.email,
+                          data?.phone,
+                          data?.name,
+                          data?.pnr,
+                          data?.tripType,
+                          data?.pax,
+                          data?.adultCount,
+                          data?.childCount,
+                          data?.infantCount,
+                          data?.netCost,
+                          data?.adultCostBase,
+                          data?.childCostBase,
+                          data?.infantCostBase,
+                          data?.adultCostTax,
+                          data?.childCostTax,
+                          data?.infantCostTax,
+                          data?.grossCost,
+                          data?.baseFare,
+                          data?.Tax,
+                          data?.deptFrom,
+                          data?.airlines,
+                          data?.arriveTo,
+                          data?.gds,
+                          data?.status,
+                          data?.dateTime,
+                          data?.issueTime,
+                          data?.timeLimit
+                        )
+                      }
+                    >
+                      View Details
+                    </button>
+                  </td>
                   <td>Call</td>
                 </tr>
               )
