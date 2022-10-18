@@ -6,8 +6,7 @@ import AddBank from "../AddBank/AddBank";
 import Agent from "../Agent/Agent";
 import AllAgent from "../Agent/AllAgent";
 import Deactivate from "../Agent/Deactivate";
-import Pending from "../Agent/Pending";
-import Reject from "../Agent/Reject";
+ import Reject from "../Agent/Reject";
 import BankDetails from "../BankDetails/BankDetails";
 import ChartOfAccount from "../ChartOfAccount/ChartOfAccount";
 import ChartOfAccountDetails from "../ChartOfAccount/ChartOfAccountDetails";
@@ -60,6 +59,7 @@ import Vendor from "../Vendor/Vendor";
 
 import DashboardMain from "./../Dashboard/DashboardMain/DashboardMain";
 import Ticketing from "../FlyFarInternational/Ticketing/Ticketing";
+import Pending from "../FlyFarInternational/PaymentComponents/Pending";
 const Router = () => {
   return (
     <Box>
@@ -215,7 +215,7 @@ const Router = () => {
                   path="/manageWebsite/www.flyfarint.com/payment/all"
                   element={<AllPayment />}
                 ></Route>
-                <Route path="/manageWebsite/www.flyfarint.com/payment/pending"></Route>
+                <Route path="/manageWebsite/www.flyfarint.com/payment/pending" element={<Pending/>}></Route>
                 <Route path="/manageWebsite/www.flyfarint.com/payment/approved"></Route>
                 <Route path="/manageWebsite/www.flyfarint.com/payment/cancelled"></Route>
               </Route>
