@@ -1,9 +1,10 @@
-import { Box} from "@mui/material";
-import React from "react";
+import { Box, TableCell, TableRow } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { DarkmodeEnable } from "../../../App";
 import TableDetailsPayment from "../../TableCompo/TableDetailsPayment";
+import TablePayment from "../../TableCompo/TablePayment";
 import { useQuery } from "react-query"
-const Approved = () => {
+const RejectedPayment = () => {
   const { isDark } = React.useContext(DarkmodeEnable);
   const allPaymentArr = [
     "Refference",
@@ -48,4 +49,4 @@ const Approved = () => {
   );
 };
 
-export default Approved;
+export default RejectedPayment;

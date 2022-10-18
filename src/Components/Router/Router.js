@@ -63,6 +63,7 @@ import Ticketing from "../FlyFarInternational/Ticketing/Ticketing";
 import Approved from "../FlyFarInternational/PaymentComponents/Approved";
 import Pending from "../FlyFarInternational/PaymentComponents/Pending";
 import PendingAgent from "../Agent/PendingAgent";
+import RejectedPayment from "../FlyFarInternational/PaymentComponents/RejectedPayment";
 const Router = () => {
   return (
     <Box>
@@ -220,7 +221,7 @@ const Router = () => {
                 ></Route>
                 <Route path="/manageWebsite/www.flyfarint.com/payment/pending" element={<Pending/>}></Route>
                 <Route path="/manageWebsite/www.flyfarint.com/payment/approved" element={<Approved/>}></Route>
-                <Route path="/manageWebsite/www.flyfarint.com/payment/cancelled"></Route>
+                <Route path="/manageWebsite/www.flyfarint.com/payment/cancelled" element={<RejectedPayment/>}></Route>
               </Route>
               <Route
                 path="/manageWebsite/www.flyfarint.com/groupFare"
