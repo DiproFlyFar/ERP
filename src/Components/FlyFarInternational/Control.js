@@ -10,7 +10,7 @@ const Control = () => {
         {" "}
         <Box
           sx={{
-            display: "flex",
+            display: "block",
             alignItems: "center",
             mt: "20px",
             flexWrap: "wrap",

@@ -31,7 +31,7 @@ const FlyFarInternational = () => {
       >
         Fly Far International
       </Typography>
-      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+      <Box sx={{ display: "block", flexWrap: "wrap" }}>
         {" "}
         <Box
           sx={{
