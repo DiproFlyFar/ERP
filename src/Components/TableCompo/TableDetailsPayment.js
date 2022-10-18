@@ -13,7 +13,7 @@ import { Button, Grid, Typography } from "@mui/material";
 import { DarkmodeEnable } from "../../App";
 import { CircularProgress } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
-
+import "./Table.css"
 function Row({ row, isLoading }) {
   const [open, setOpen] = useState(false);
   const location = useLocation();
@@ -428,8 +428,8 @@ const TableDetailsPayment = ({ rows, arr, isLoading }) => {
 
 
             {rows?.map((row) => (
-              location.pathname === "/manageWebsite/www.flyfarint.com/payment/all" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/pending" && row.status === "pending" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : null
-              // <Row key={row.id} row={row} arr={arr} isLoading={isLoading} />
+              location.pathname === "/manageWebsite/www.flyfarint.com/payment/all" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/pending" && row.status === "pending" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/approved" && row.status === "approved" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/cancelled" && row.status === "reject" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : null
+
             ))}
 
           </TableBody>

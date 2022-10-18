@@ -57,7 +57,7 @@ const FlyFarInternational = () => {
           </NavLink>
 
           <NavLink
-            to="/manageWebsite/www.flyfarint.com/agent"
+            to="/manageWebsite/www.flyfarint.com/agent/all"
             className={({ isActive }) => (isActive ? "active-link" : "link")}
           >
             Agent

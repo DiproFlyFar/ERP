@@ -18,3 +18,10 @@
   font-weight: normal;
   margin: 10px 10px 5px 0;
 }
+th,
+td {
+  border: 0 !important;
+}
+tbody {
+  border-bottom: 1px solid white;
+}

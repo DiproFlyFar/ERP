@@ -107,7 +107,7 @@ const ManageWebsite = () => {
           >
             {w.name}
           </Typography>
-          <Link to={`/manageWebsite/${w.website}`}>
+          <Link to={`/manageWebsite/${w.website}/home`}>
             <Typography
               sx={{
                 fontSize: "15px",

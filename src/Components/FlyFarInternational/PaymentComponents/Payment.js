@@ -53,7 +53,7 @@ const Payment = () => {
                 isActive ? "selected_tab" : "not_selected_tab"
               }
             >
-              Cancelled
+              Rejected
             </NavLink>
           </Box>
           {/* Select Type Section */}
