@@ -96,7 +96,7 @@ const Hold = () => {
   };
 
   return (
-    <Box style={{ width: "100% " }}>
+    <Box style={{ width: "97% " }}>
       <Box className="balance-transaction" marginTop={"20px"}>
         <table>
           <tr>
@@ -118,7 +118,7 @@ const Hold = () => {
             (data) =>
               data.status === "Hold" && (
                 <tr>
-                  <td>{data?.BookingId}</td>
+                  <td>{data?.bookingId}</td>
                   <td>{data?.status}</td>
                   <td>{data?.gds}</td>
                   <td>{data?.tripType}</td>
