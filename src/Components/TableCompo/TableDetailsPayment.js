@@ -325,14 +325,24 @@ const TableDetailsPayment = ({ rows, arr, isLoading }) => {
       sx={{
         width: "100%",
         minHeight: "100vh",
+        position: "relative"
       }}
     >
+
+      {/* Loading Spinner */}
+      {
+        isLoading&&<Box sx={{ display: "flex", justifyContent: "center", padding: "20px", position: "absolute", top: "20%", width: "100%" }} spacing={2} direction="row">
+
+        <CircularProgress color="inherit" />
+      </Box>
+      }
       <TableContainer
         component={Paper}
         sx={{
           width: "100%",
           marginTop: "30px",
           boxShadow: "none",
+
         }}
       >
         <Table aria-label="collapsible table">
@@ -408,12 +418,10 @@ const TableDetailsPayment = ({ rows, arr, isLoading }) => {
             </TableRow>
           </TableHead>
 
-          <TableBody sx={{background:"red"}}>
-            <Box sx={{  background: "green", display: "flex", justifyContent: "center",mt:"20px" }} spacing={2} direction="row">
 
-              <CircularProgress color="inherit" />
-            </Box>
-          
+          <TableBody >
+
+
             {rows?.map((row) => (
               <Row key={row.id} row={row} arr={arr} isLoading={isLoading} />
             ))}
@@ -421,6 +429,7 @@ const TableDetailsPayment = ({ rows, arr, isLoading }) => {
           </TableBody>
         </Table>
       </TableContainer>
+
     </Box>
   );
 };
