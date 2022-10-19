@@ -24,6 +24,7 @@ const FlyFarInternational = () => {
           color: `${isDark ? "white" : "#003566"}`,
           fontWeight: "600",
           fontSize: "23px",
+          lineHeight: "10px",
         }}
       >
         Fly Far International
@@ -34,7 +35,7 @@ const FlyFarInternational = () => {
           sx={{
             display: "flex",
             alignItems: "center",
-            mt: "20px",
+            mt: "15px",
             flexWrap: "wrap",
             width: "100%",
           }}
@@ -42,11 +43,13 @@ const FlyFarInternational = () => {
           <NavLink
             to="/manageWebsite/www.flyfarint.com/home"
             className={({ isActive }) => (isActive ? "active-link" : "link")}
+            style={{fontSize:'14px'}}
           >
             {" "}
             Home
           </NavLink>
           <NavLink
+           style={{ fontSize: "14px" }}
             to="/manageWebsite/www.flyfarint.com/control/apipage"
             className={({ isActive }) => (isActive ? "active-link" : "link")}
           >
@@ -54,24 +57,28 @@ const FlyFarInternational = () => {
           </NavLink>
 
           <NavLink
+           style={{ fontSize: "14px" }}
             to="/manageWebsite/www.flyfarint.com/agent/all"
             className={({ isActive }) => (isActive ? "active-link" : "link")}
           >
             Agent
           </NavLink>
           <NavLink
+           style={{ fontSize: "14px" }}
             to="/manageWebsite/www.flyfarint.com/booking/all"
             className={({ isActive }) => (isActive ? "active-link" : "link")}
           >
             Booking
           </NavLink>
           <NavLink
+           style={{ fontSize: "14px" }}
             to="/manageWebsite/www.flyfarint.com/payment/all"
             className={({ isActive }) => (isActive ? "active-link" : "link")}
           >
             Payment
           </NavLink>
           <NavLink
+           style={{ fontSize: "14px" }}
             to="/manageWebsite/www.flyfarint.com/ticketing"
             className={({ isActive }) => (isActive ? "active-link" : "link")}
           >
@@ -79,30 +86,35 @@ const FlyFarInternational = () => {
           </NavLink>
 
           <NavLink
+           style={{ fontSize: "14px" }}
             to="/manageWebsite/www.flyfarint.com/groupFare"
             className={({ isActive }) => (isActive ? "active-link" : "link")}
           >
             Group Fare
           </NavLink>
           <NavLink
+           style={{ fontSize: "14px" }}
             to="/manageWebsite/www.flyfarint.com/tourPackage"
             className={({ isActive }) => (isActive ? "active-link" : "link")}
           >
             Tour Package
           </NavLink>
           <NavLink
+           style={{ fontSize: "14px" }}
             to="/manageWebsite/www.flyfarint.com/searchList"
             className={({ isActive }) => (isActive ? "active-link" : "link")}
           >
             Search List
           </NavLink>
           <NavLink
+           style={{ fontSize: "14px" }}
             to="/manageWebsite/www.flyfarint.com/activityLog"
             className={({ isActive }) => (isActive ? "active-link" : "link")}
           >
             Activity Log
           </NavLink>
           <NavLink
+           style={{ fontSize: "14px" }}
             to="/manageWebsite/www.flyfarint.com/notifications"
             className={({ isActive }) => (isActive ? "active-link" : "link")}
           >

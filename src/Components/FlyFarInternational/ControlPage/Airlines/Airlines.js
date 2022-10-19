@@ -6,7 +6,7 @@ import Pagination from "@mui/material/Pagination";
 const Airlines = () => {
   const [airData, setAirData] = useState([]);
   const [mainAirData, setMainAirData] = useState([]);
-  console.log(airData);
+
   // Sets the state of the const for the given page and state.
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
