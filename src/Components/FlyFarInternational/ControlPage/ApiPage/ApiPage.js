@@ -16,6 +16,8 @@ const ApiPage = () => {
       value: active[value] === "1" ? 0 : 1,
     });
 
+    console.log(body);
+
     await fetch(url, {
       method: "POST",
       headers: {
