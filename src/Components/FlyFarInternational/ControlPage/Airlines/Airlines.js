@@ -24,6 +24,7 @@ const Airlines = () => {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [ticketDetails, setTicketDetail] = useState([]);
+
   const handleOpen = async () => {
     setOpen(true);
   };
@@ -63,6 +64,41 @@ const Airlines = () => {
   const [airNameEng, setAirNameEng] = useState("");
   const [airNameBng, setAirNameBng] = useState("");
   const [airCommission, setAirCommission] = useState("");
+
+  //functionality for update modal data
+  //  state for update data
+  const [updateData, setUpdateData] = useState({});
+  const UpdateHandleOpen = async (id) => {
+    setUpdateOpen(true);
+
+    await fetch(
+      `https://api.flyfarint.com/v.1.0.0/Admin/Airlines/all.php?id=${id}`
+    )
+      .then((res) => res.json())
+      .then((data) => setUpdateData(data[0]));
+  };
+
+  const UpdateHandleClose = () => {
+    setUpdateOpen(false);
+  };
+
+  const [modalUpdateData, setModalUpdateData] = useState({
+    code: updateData.code,
+    commission: updateData.commission,
+    name: updateData.name,
+    nameBangla: updateData.nameBangla,
+  });
+
+  const handleModalUpdateData = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setModalUpdateData({
+      ...modalUpdateData,
+      [name]: value,
+    });
+  };
+
+  console.log(modalUpdateData);
 
   const airDataPost = async (e) => {
     let url = "https://api.flyfarint.com/v.1.0.0/Admin/Airlines/add.php";
@@ -118,6 +154,12 @@ const Airlines = () => {
         }
       });
   };
+
+  // update  airlines data
+
+  const [Updateopen, setUpdateOpen] = React.useState(false);
+
+  console.log(updateData);
 
   return (
     <Box style={{ width: "97%" }}>
@@ -262,46 +304,138 @@ const Airlines = () => {
           </tr>
 
           {mainAirData?.slice(0, size).map((data) => (
-            <tr>
-              <td>{data?.code}</td>
-              <td>{data?.name}</td>
-              <td>{data?.nameBangla}</td>
+            <>
+              <tr>
+                <td>{data?.code}</td>
+                <td>{data?.name}</td>
+                <td>{data?.nameBangla}</td>
 
-              <td style={{ textAlign: "right" }}>
-                <Box>
-                  <button
-                    style={{
-                      cursor: "pointer",
-                      fontSize: "14px",
-                      border: "none",
-                      height: "24px",
-                      backgroundColor: "#003566",
-                      color: "#fff",
-                      padding: "0px 22px",
-                      marginRight: "10px",
-                    }}
-                  >
-                    Update
-                  </button>
-                  <button
-                    style={{
-                      cursor: "pointer",
-                      fontSize: "14px",
-                      border: "none",
-                      height: "24px",
-                      backgroundColor: "#003566",
-                      color: "#fff",
-                      padding: "0px 22px",
-                    }}
-                    onClick={() => deleteRequest(data?.id)}
-                  >
-                    Delate
-                  </button>
-                </Box>
-              </td>
-            </tr>
+                <td style={{ textAlign: "right" }}>
+                  <Box>
+                    <button
+                      style={{
+                        cursor: "pointer",
+                        fontSize: "14px",
+                        border: "none",
+                        height: "24px",
+                        backgroundColor: "#003566",
+                        color: "#fff",
+                        padding: "0px 22px",
+                        marginRight: "10px",
+                      }}
+                      onClick={() => UpdateHandleOpen(data?.id)}
+                    >
+                      Update
+                    </button>
+                    <button
+                      style={{
+                        cursor: "pointer",
+                        fontSize: "14px",
+                        border: "none",
+                        height: "24px",
+                        backgroundColor: "#003566",
+                        color: "#fff",
+                        padding: "0px 22px",
+                      }}
+                      onClick={() => deleteRequest(data?.id)}
+                    >
+                      Delate
+                    </button>
+                  </Box>
+                </td>
+              </tr>
+            </>
           ))}
         </table>
+
+        {/* update modal */}
+        <Box>
+          <Modal
+            open={Updateopen}
+            onClose={UpdateHandleClose}
+            aria-labelledby="parent-modal-title"
+            aria-describedby="parent-modal-description"
+          >
+            <Box
+              sx={{ ...style, width: 500 }}
+              style={{ border: "none", borderRadius: "5px" }}
+            >
+              <Box className="airlinePnr1" mb={2}>
+                <label>Airline Code:</label>
+                <br></br>
+                <input
+                  style={{
+                    marginLeft: "0px",
+                    marginTop: "5px",
+                    width: "100%",
+                  }}
+                  required
+                  type="text"
+                  name="code"
+                  placeholder="AA"
+                  value={modalUpdateData?.code}
+                  onChange={(e) => handleModalUpdateData(e)}
+                />
+              </Box>
+              <Box className="airlinePnr1" mb={2}>
+                <label>Airline Name:</label>
+                <br></br>
+                <input
+                  style={{
+                    marginLeft: "0px",
+                    marginTop: "5px",
+                    width: "100%",
+                  }}
+                  required
+                  type="text"
+                  placeholder="American Airlines"
+                  name="name"
+                  value={modalUpdateData?.name}
+                  onChange={(e) => handleModalUpdateData(e)}
+                />
+              </Box>
+              <Box className="airlinePnr1" mb={2}>
+                <label>Airline Bengali Name:</label> <br></br>
+                <input
+                  style={{
+                    marginLeft: "0px",
+                    marginTop: "5px",
+                    width: "100%",
+                  }}
+                  required
+                  type="text"
+                  placeholder="আমেরিকান এয়ারলাইন্স"
+                  name="nameBangla"
+                  value={modalUpdateData?.nameBangla}
+                  onChange={(e) => handleModalUpdateData(e)}
+                />
+              </Box>
+              <Box className="airlinePnr1" mb={2}>
+                <label>Commission:</label> <br></br>
+                <input
+                  style={{
+                    marginLeft: "0px",
+                    marginTop: "5px",
+                    width: "100%",
+                  }}
+                  required
+                  type="text"
+                  placeholder="commission"
+                  name="commission"
+                  value={modalUpdateData.commission}
+                  onChange={(e) => handleModalUpdateData(e)}
+                />
+              </Box>
+
+              <Box className="balance-transaction">
+                <Box className="saveBtn1" mt={2}>
+                  <button onClick={airDataPost}>Update</button>
+                </Box>
+              </Box>
+            </Box>
+          </Modal>
+        </Box>
+        {/* update modal end */}
 
         <Box
           sx={{
