@@ -54,7 +54,6 @@ import SalesQuotation from "../Quotation/SalesQuotation";
 import SalaryDetails from "../SalaryDetails/SalaryDetails";
 import TableCompoSalaryDetails from "../TableCompo/TableCompoSalaryDetails";
 import TableCompoWithDetails from "../TableCompo/TableCompoWithDetails";
-import TableCompoWithTwoBtn from "../TableCompo/TableCompoWithTwoBtn";
 import AddVendor from "../Vendor/AddVendor";
 import Vendor from "../Vendor/Vendor";
 
@@ -68,7 +67,12 @@ import IssuedDetails from "../FlyFarInternational/BookingComponents/IssuedDetail
 import ApiPage from "../FlyFarInternational/ControlPage/ApiPage/ApiPage";
 import Airlines from "../FlyFarInternational/ControlPage/Airlines/Airlines";
 import CurrencyPage from "../FlyFarInternational/ControlPage/CurrencyPage/CurrencyPage";
-const Router = () => {
+import AllGroupFares from "../FlyFarInternational/GroupFareComponent/AllGroupFares";
+import TextFields from "../FlyFarInternational/GroupFareComponent/TextFields";
+import NonStop from "../FlyFarInternational/GroupFareComponent/NonStop";
+import OneStop from "../FlyFarInternational/GroupFareComponent/OneStop";
+import TwoStop from "../FlyFarInternational/GroupFareComponent/TwoStop";
+ const Router = () => {
   return (
     <Box>
       <BrowserRouter>
@@ -259,8 +263,13 @@ const Router = () => {
               </Route>
               <Route
                 path="/manageWebsite/www.flyfarint.com/groupFare"
-                element={<GroupFare />}
-              ></Route>
+                element={<AllGroupFares />}
+              >
+                <Route path="/manageWebsite/www.flyfarint.com/groupFare/nonStop" element={<NonStop/>} ></Route>
+                <Route path="/manageWebsite/www.flyfarint.com/groupFare/oneStop" element={<OneStop/>}></Route>
+                <Route path="/manageWebsite/www.flyfarint.com/groupFare/twoStop" element={<TwoStop/>}></Route>
+              </Route>
+
 
               <Route
                 path="/manageWebsite/www.flyfarint.com/ticketing"
