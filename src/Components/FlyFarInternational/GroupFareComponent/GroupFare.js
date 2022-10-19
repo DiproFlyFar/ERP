@@ -1,7 +1,7 @@
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
-import { FaPlane,FaCircle } from "react-icons/fa";
+import { FaPlane, FaCircle } from "react-icons/fa";
 const GroupFare = () => {
   return <Box sx={{ width: "80%", mt: "70px" }}>
     <Grid container spacing={2} p={3} sx={{ boxShadow: "0px 0px 4px rgba(84, 84, 84, 0.11)", borderRadius: "12px" }} >
@@ -24,16 +24,20 @@ const GroupFare = () => {
 
 
       </Grid>
-      <Grid item xs={2}>
-        <Typography sx={{ fontSize: "10px" }}> <span style={{ color: "#003566", fontWeight: "600" }}>31:25 Hrs |</span>  <span style={{ color: "#DC143C", fontWeight: "600" }}> 2 Stops</span></Typography>
-        <Box sx={{display:"flex",justifyContent:"space-between",alignItems:"center",mt:"20px"}}>
-          <FaCircle style={{color:"#C7C7C7"}}/>
-          <FaPlane style={{color:"#003566"}}></FaPlane>
-          <Box sx={{background:"#DC143C",height:"10px",width:"35px",borderRadius:"5px"}}></Box>
-          <Box sx={{background:"#DC143C",height:"10px",width:"35px",borderRadius:"5px"}}></Box>
-          <FaCircle style={{color:"#C7C7C7"}}/>
+      <Grid item xs={3} >
+        <Typography sx={{ fontSize: "10px", display: "flex", justifyContent: "center" }}> <span style={{ color: "#003566", fontWeight: "600" }}>31:25 Hrs |</span>  <span style={{ color: "#DC143C", fontWeight: "600" }}> 2 Stops</span></Typography>
+        <Box >
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mt: "20px" }}>
+            <FaCircle style={{ color: "#C7C7C7" }} />
+            <FaPlane style={{ color: "#003566" }}></FaPlane>
+            <Box sx={{ background: "#DC143C", height: "10px", width: "35px", borderRadius: "5px" }}></Box>
+            <Box sx={{ background: "#DC143C", height: "10px", width: "35px", borderRadius: "5px" }}></Box>
+            <FaCircle style={{ color: "#C7C7C7" }} />
 
+          </Box>
+          <Box sx={{ borderBottom: "1px solid gray",marginTop:"-9px" }}></Box>
         </Box>
+
 
       </Grid>
       <Grid item xs={2}  >
