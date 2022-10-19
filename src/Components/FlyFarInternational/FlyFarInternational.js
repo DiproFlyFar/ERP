@@ -1,8 +1,5 @@
 import {
-  Button,
-  Grid,
-  TextareaAutosize,
-  TextField,
+ 
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
@@ -50,7 +47,7 @@ const FlyFarInternational = () => {
             Home
           </NavLink>
           <NavLink
-            to="/manageWebsite/www.flyfarint.com/control"
+            to="/manageWebsite/www.flyfarint.com/control/"
             className={({ isActive }) => (isActive ? "active-link" : "link")}
           >
             Control

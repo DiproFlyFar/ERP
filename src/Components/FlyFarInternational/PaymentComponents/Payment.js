@@ -57,15 +57,17 @@ const Payment = () => {
             </NavLink>
           </Box>
           {/* Select Type Section */}
-          <Box>
-          <label for="payment-method" >Payment method:</label>
-          <br></br>
+          {/* <Box>
+            <label for="payment-method" >Payment method:</label>
+            <br></br>
             <select name="payment-method" id="payment-method" style={{ width: "250px", padding: "10px", border: "1px solid #003566", marginRight: "25px", cursor: "pointer" }}>
-            
+
               <option value="cash">Cash</option>
               <option value="cheque">Cheque</option>
-             
-            </select></Box>
+              <option value="bankTransfer">Bank Transfer</option>
+              <option value="mobileTransfer">Mobile Transfer</option>
+
+            </select></Box> */}
 
         </Box>
 

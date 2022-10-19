@@ -22,11 +22,11 @@ const RejectedPayment = () => {
 
 
   // React Query
-  const { isLoading, data } = useQuery("allPaymentData", () => { 
-   return fetch(
+  const { isLoading, data } = useQuery("allPaymentData", () => {
+    return fetch(
       "https://api.flyfarint.com/v.1.0.0/Admin/DepositRequest/allRequest.php?all"
-    ) .then((res) => res.json())
-     
+    ).then((res) => res.json())
+
   })
   return (
     <Box
@@ -36,15 +36,15 @@ const RejectedPayment = () => {
         minHeight: "100vh",
       }}
     >
-{      console.log("Data by react query",data)}
- 
+      {console.log("Data by react query", data)}
+
       <TableDetailsPayment
         rows={data}
         arr={allPaymentArr}
         details="vendorDetails"
-        isLoading = {isLoading}
+        isLoading={isLoading}
       ></TableDetailsPayment>
-   
+     
     </Box>
   );
 };

@@ -36,7 +36,8 @@ const Pending = () => {
         minHeight: "100vh",
       }}
     >
-{      console.log("Data by react query",data)}
+ 
+ 
  
       <TableDetailsPayment
         rows={data}
