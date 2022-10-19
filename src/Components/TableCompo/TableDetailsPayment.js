@@ -14,6 +14,7 @@ import { DarkmodeEnable } from "../../App";
 import { CircularProgress } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 import "./Table.css"
+import Loader from "../Loader/Loader";
 function Row({ row, isLoading }) {
   const [open, setOpen] = useState(false);
   const location = useLocation();
@@ -371,8 +372,8 @@ const TableDetailsPayment = ({ rows, arr, isLoading, selectedOption }) => {
       {/* Loading Spinner */}
       {
         isLoading && <Box sx={{ display: "flex", justifyContent: "center", padding: "20px", position: "absolute", top: "20%", width: "100%" }} spacing={2} direction="row">
+          <Loader></Loader>
 
-          <CircularProgress color="inherit" />
         </Box>
       }
       <TableContainer
@@ -466,24 +467,24 @@ const TableDetailsPayment = ({ rows, arr, isLoading, selectedOption }) => {
           <TableBody >
 
 
-             {selectedOption==="select-option"&&rows?.map((row) => (
+            {selectedOption === "select-option" && rows?.map((row) => (
               location.pathname === "/manageWebsite/www.flyfarint.com/payment/all" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/pending" && row.status === "pending" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/approved" && row.status === "approved" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/cancelled" && row.status === "reject" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : null
 
             ))}
 
             {
-              selectedOption==="cash"&&rows?.map((row) => ( 
-                location.pathname === "/manageWebsite/www.flyfarint.com/payment/all"&&row.paymentway==="Cash" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/pending" && row.status === "pending" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/approved" && row.status === "approved" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/cancelled" && row.status === "reject" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : null
-  
+              selectedOption === "cash" && rows?.map((row) => (
+                location.pathname === "/manageWebsite/www.flyfarint.com/payment/all" && row.paymentway === "Cash" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/pending" && row.status === "pending" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/approved" && row.status === "approved" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/cancelled" && row.status === "reject" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : null
+
               ))
             }
             {
-              selectedOption==="cheque"&&rows?.map((row) => ( 
-                location.pathname === "/manageWebsite/www.flyfarint.com/payment/all"&&row.paymentway==="Cheque" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/pending" && row.status === "pending" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/approved" && row.status === "approved" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/cancelled" && row.status === "reject" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : null
-  
+              selectedOption === "cheque" && rows?.map((row) => (
+                location.pathname === "/manageWebsite/www.flyfarint.com/payment/all" && row.paymentway === "Cheque" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/pending" && row.status === "pending" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/approved" && row.status === "approved" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : location.pathname === "/manageWebsite/www.flyfarint.com/payment/cancelled" && row.status === "reject" ? <Row key={row.id} row={row} arr={arr} isLoading={isLoading} /> : null
+
               ))
             }
-         
+
           </TableBody>
 
         </Table>
