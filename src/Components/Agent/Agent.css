@@ -5,7 +5,8 @@
   border-radius: 0 !important;
   border: 1px solid #003566;
   margin-right: 10px;
-  
+  font-weight: 500;
+  font-size: 12px;
 }
 .not_selected_tab {
   background: white !important;
@@ -14,4 +15,6 @@
   border-radius: 0 !important;
   border: 1px solid #003566 !important;
   margin-right: 10px;
+  font-weight: 500;
+  font-size: 12px;
 }

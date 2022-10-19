@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
- 
+
 const Agent = () => {
   return (
     <Box>
@@ -30,15 +30,24 @@ const Agent = () => {
           <NavLink
             to="/manageWebsite/www.flyfarint.com/agent/pending"
             className={({ isActive }) =>
-            isActive ? "selected_tab" : "not_selected_tab"
+              isActive ? "selected_tab" : "not_selected_tab"
             }
           >
             Pending
           </NavLink>
           <NavLink
+            to="/manageWebsite/www.flyfarint.com/agent/pending"
+            className={({ isActive }) =>
+              isActive ? "selected_tab" : "not_selected_tab"
+            }
+          >
+            Active
+          </NavLink>
+
+          <NavLink
             to="/manageWebsite/www.flyfarint.com/agent/reject"
             className={({ isActive }) =>
-            isActive ? "selected_tab" : "not_selected_tab"
+              isActive ? "selected_tab" : "not_selected_tab"
             }
           >
             Reject
@@ -46,7 +55,7 @@ const Agent = () => {
           <NavLink
             to="/manageWebsite/www.flyfarint.com/agent/deactivate"
             className={({ isActive }) =>
-            isActive ? "selected_tab" : "not_selected_tab"
+              isActive ? "selected_tab" : "not_selected_tab"
             }
           >
             Deactivate
