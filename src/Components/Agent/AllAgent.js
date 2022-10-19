@@ -1,6 +1,7 @@
 import { Button, Pagination, Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { NavLink } from "react-router-dom";
 import { DarkmodeEnable } from "../../App";
 import TableCompoWithOperation from "../TableCompo/TableCompoWithOperation";
@@ -19,23 +20,32 @@ const AllAgent = () => {
     "Operation",
   ];
 
-  const [bookingData, setBookingData] = useState([]);
-  useEffect(() => {
-    fetch("https://api.flyfarint.com/v.1.0.0/Admin/Agent/allAgent.php?all")
-      .then((res) => res.json())
-      .then((data) => setBookingData(data));
-  }, []);
+  // const [bookingData, setBookingData] = useState([]);
+  // useEffect(() => {
+  //   fetch("https://api.flyfarint.com/v.1.0.0/Admin/Agent/allAgent.php?all")
+  //     .then((res) => res.json())
+  //     .then((data) => setBookingData(data));
+  // }, []);
+
+  // React Query
+  const { isLoading, data } = useQuery("allPaymentData", () => {
+    return fetch(
+      "https://api.flyfarint.com/v.1.0.0/Admin/Agent/allAgent.php?all"
+    ).then((res) => res.json())
+
+  })
 
   return (
     <Box sx={{ width: "99%" }}>
 
 
       <TableCompoWithOperation
-        rows={bookingData}
+        rows={data}
         arr={agentTableHeadings}
+        isLoading={isLoading}
 
       ></TableCompoWithOperation>
-      {console.log("Booking Data is", bookingData)}
+      {console.log("Booking Data is", data)}
       <Stack spacing={2} sx={{ float: "right", mb: "20px" }}>
         <Pagination count={10} color="primary" shape="rounded" />
       </Stack>

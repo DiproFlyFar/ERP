@@ -10,6 +10,7 @@ import Paper from "@mui/material/Paper";
 import { Button, Grid, Modal, TextField, Typography } from "@mui/material";
 import { DarkmodeEnable } from "../../App";
 import "./TableCompoWithOperation.css";
+import Loader from "../Loader/Loader";
 
 const style = {
   position: "absolute",
@@ -241,7 +242,7 @@ function Row({ row, arr }) {
   );
 }
 
-const TableCompoWithOperation = ({ rows, arr }) => {
+const TableCompoWithOperation = ({ rows, arr,isLoading }) => {
  
 
   return (
@@ -249,9 +250,16 @@ const TableCompoWithOperation = ({ rows, arr }) => {
       sx={{
         width: "100%",
         height: "100vh",
+        position: "relative"
       }}
     >
-    
+      {/* Loading Spinner */}
+      {
+        isLoading && <Box sx={{ display: "flex", justifyContent: "center", padding: "20px", position: "absolute", top: "20%", width: "100%" }} spacing={2} direction="row">
+          <Loader></Loader>
+
+        </Box>
+      }
       <TableContainer
         component={Paper}
         sx={{
@@ -276,7 +284,7 @@ const TableCompoWithOperation = ({ rows, arr }) => {
             {console.log(" Rows ", rows)} */}
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {rows?.map((row) => (
               <Row key={row.id} row={row} arr={arr} />
             ))}
           </TableBody>

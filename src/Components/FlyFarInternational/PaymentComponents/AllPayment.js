@@ -18,7 +18,6 @@ const AllPayment = () => {
     "",
     "Action",
   ];
-  const [open, setOpen] = React.useState(false);
 
 
   // React Query
