@@ -1,8 +1,50 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+
+import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import "./ApiPage.css";
 
 const ApiPage = () => {
+  const [active, setActive] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleBtnActive = async (value) => {
+    let url = "https://api.flyfarint.com/v.1.0.0/Admin/Control/edit.php";
+    let body = JSON.stringify({
+      key: value,
+      value: active[value] === "1" ? 0 : 1,
+    });
+
+    await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: body,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.status === "success") {
+          setIsLoading((prev) => !prev);
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Updated Successfully",
+            confirmButtonText: "ok",
+          });
+        }
+      });
+  };
+
+  useEffect(() => {
+    fetch("https://api.flyfarint.com/v.1.0.0/Admin/Control/all.php?all")
+      .then((res) => res.json())
+      .then((data) => setActive(data[0]));
+  }, [isLoading]);
+
   return (
     <Box style={{ width: "97%" }}>
       <Box mt={3}>
@@ -34,7 +76,38 @@ const ApiPage = () => {
             Sabre
           </Typography>
           <Box className="apiBtn1">
-            <button>Deactivate</button>
+            <button
+              style={
+                active?.sabre === "1"
+                  ? {
+                      cursor: "pointer",
+                      fontSize: "15px",
+                      border: "none",
+                      height: "30px",
+                      backgroundColor: "green",
+                      color: "#fff",
+                      padding: "0px 22px",
+                      borderRadius: " 5px",
+                    }
+                  : {
+                      cursor: "pointer",
+                      fontSize: "15px",
+                      border: "none",
+                      height: "30px",
+                      backgroundColor: "red",
+                      color: "#fff",
+                      padding: "0px 22px",
+                      borderRadius: " 5px",
+                    }
+              }
+              onClick={() => handleBtnActive("sabre")}
+            >
+              {active?.sabre === "1" ? (
+                <span>Activate</span>
+              ) : (
+                <span>Deactivate</span>
+              )}
+            </button>
           </Box>
         </Box>
       </Box>
@@ -60,18 +133,36 @@ const ApiPage = () => {
           </Typography>
           <Box className="apiBtn2">
             <button
-              style={{
-                cursor: "pointer",
-                fontSize: "15px",
-                border: "none",
-                height: "30px",
-                backgroundColor: "#003566",
-                color: "#fff",
-                padding: "0px 22px",
-                borderRadius: " 5px",
-              }}
+              style={
+                active?.galileo === "1"
+                  ? {
+                      cursor: "pointer",
+                      fontSize: "15px",
+                      border: "none",
+                      height: "30px",
+                      backgroundColor: "green",
+                      color: "#fff",
+                      padding: "0px 22px",
+                      borderRadius: " 5px",
+                    }
+                  : {
+                      cursor: "pointer",
+                      fontSize: "15px",
+                      border: "none",
+                      height: "30px",
+                      backgroundColor: "red",
+                      color: "#fff",
+                      padding: "0px 22px",
+                      borderRadius: " 5px",
+                    }
+              }
+              onClick={() => handleBtnActive("galileo")}
             >
-              Activate
+              {active?.galileo === "1" ? (
+                <span>Activate</span>
+              ) : (
+                <span>Deactivate</span>
+              )}
             </button>
           </Box>
         </Box>
@@ -99,18 +190,36 @@ const ApiPage = () => {
           </Typography>
           <Box className="apiBtn2">
             <button
-              style={{
-                cursor: "pointer",
-                fontSize: "15px",
-                border: "none",
-                height: "30px",
-                backgroundColor: "#003566",
-                color: "#fff",
-                padding: "0px 22px",
-                borderRadius: " 5px",
-              }}
+              style={
+                active?.flyhub === "1"
+                  ? {
+                      cursor: "pointer",
+                      fontSize: "15px",
+                      border: "none",
+                      height: "30px",
+                      backgroundColor: "green",
+                      color: "#fff",
+                      padding: "0px 22px",
+                      borderRadius: " 5px",
+                    }
+                  : {
+                      cursor: "pointer",
+                      fontSize: "15px",
+                      border: "none",
+                      height: "30px",
+                      backgroundColor: "red",
+                      color: "#fff",
+                      padding: "0px 22px",
+                      borderRadius: " 5px",
+                    }
+              }
+              onClick={() => handleBtnActive("flyhub")}
             >
-              Activate
+              {active?.flyhub === "1" ? (
+                <span>Activate</span>
+              ) : (
+                <span>Deactivate</span>
+              )}
             </button>
           </Box>
         </Box>
