@@ -1,9 +1,35 @@
 import { Box, Grid, Typography, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import "./Airlines.css";
+import Modal from "@mui/material/Modal";
 import Pagination from "@mui/material/Pagination";
+import Swal from "sweetalert2";
+import "./Airlines.css";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
 
 const Airlines = () => {
+  const [open, setOpen] = React.useState(false);
+  const [ticketDetails, setTicketDetail] = useState([]);
+  const handleOpen = async () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const [airData, setAirData] = useState([]);
   const [mainAirData, setMainAirData] = useState([]);
 
@@ -19,7 +45,7 @@ const Airlines = () => {
   };
 
   useEffect(() => {
-    fetch("https://api.flyfarint.com/v.1.0.0/AirMaterials/Airlines.php?all")
+    fetch("https://api.flyfarint.com/v.1.0.0/Admin/Airlines/all.php?all")
       .then((res) => res.json())
       .then((data) => {
         const count = data.length;
@@ -29,6 +55,63 @@ const Airlines = () => {
         setMainAirData(data);
       });
   }, []);
+
+  //  data POST
+  const [airlineCode, setAirLineCode] = useState("");
+  const [airNameEng, setAirNameEng] = useState("");
+  const [airNameBng, setAirNameBng] = useState("");
+  const [airCommission, setAirCommission] = useState("");
+
+  const airDataPost = async (e) => {
+    let url = "https://api.flyfarint.com/v.1.0.0/Admin/Airlines/add.php";
+    let body = JSON.stringify({
+      code: airlineCode,
+      nameEnglish: airNameEng,
+      nameBangla: airNameBng,
+      commission: airCommission,
+    });
+
+    console.log(body);
+
+    await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: body,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "sucess") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Updated Successfully",
+            confirmButtonText: "ok",
+          });
+        }
+      });
+    handleClose(false);
+  };
+
+  // delete request
+  const deleteRequest = (id) => {
+    fetch(
+      `https://api.flyfarint.com/v.1.0.0/Admin/Airlines/delete.php?id=${id}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "sucess") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Delete Successfully",
+            confirmButtonText: "ok",
+          });
+        }
+      });
+  };
 
   return (
     <Box style={{ width: "97%" }}>
@@ -66,10 +149,92 @@ const Airlines = () => {
                     color: "#fff",
                     padding: "0px 22px",
                   }}
+                  onClick={() => handleOpen()}
                 >
                   Add Airlines
                 </button>
               </Box>
+
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="parent-modal-title"
+                aria-describedby="parent-modal-description"
+              >
+                <Box
+                  sx={{ ...style, width: 500 }}
+                  style={{ border: "none", borderRadius: "5px" }}
+                >
+                  <Box className="airlinePnr1" mb={2}>
+                    <label>Airline Code:</label>
+                    <br></br>
+                    <input
+                      style={{
+                        marginLeft: "0px",
+                        marginTop: "5px",
+                        width: "100%",
+                      }}
+                      required
+                      type="text"
+                      name="airlinePnr"
+                      placeholder="AA"
+                      onChange={(e) => setAirLineCode(e.target.value)}
+                    />
+                  </Box>
+                  <Box className="airlinePnr1" mb={2}>
+                    <label>Airline Name:</label>
+                    <br></br>
+                    <input
+                      style={{
+                        marginLeft: "0px",
+                        marginTop: "5px",
+                        width: "100%",
+                      }}
+                      required
+                      type="text"
+                      placeholder="American Airlines"
+                      name="airlinePnr"
+                      onChange={(e) => setAirNameEng(e.target.value)}
+                    />
+                  </Box>
+                  <Box className="airlinePnr1" mb={2}>
+                    <label>Airline Bengali Name:</label> <br></br>
+                    <input
+                      style={{
+                        marginLeft: "0px",
+                        marginTop: "5px",
+                        width: "100%",
+                      }}
+                      required
+                      type="text"
+                      placeholder="আমেরিকান এয়ারলাইন্স"
+                      name="airlinePnr"
+                      onChange={(e) => setAirNameBng(e.target.value)}
+                    />
+                  </Box>
+                  <Box className="airlinePnr1" mb={2}>
+                    <label>Commission:</label> <br></br>
+                    <input
+                      style={{
+                        marginLeft: "0px",
+                        marginTop: "5px",
+                        width: "100%",
+                      }}
+                      required
+                      type="text"
+                      placeholder="commission"
+                      name="airlinePnr"
+                      onChange={(e) => setAirCommission(e.target.value)}
+                    />
+                  </Box>
+
+                  <Box className="balance-transaction">
+                    <Box className="saveBtn1" mt={2}>
+                      <button onClick={airDataPost}>Save</button>
+                    </Box>
+                  </Box>
+                </Box>
+              </Modal>
               <Box className="airlineBtn1">
                 <input type="text" placeholder="search" />
               </Box>
@@ -122,6 +287,7 @@ const Airlines = () => {
                       color: "#fff",
                       padding: "0px 22px",
                     }}
+                    onClick={() => deleteRequest(data?.id)}
                   >
                     Delate
                   </button>
