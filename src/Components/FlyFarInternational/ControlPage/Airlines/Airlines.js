@@ -4,6 +4,7 @@ import Modal from "@mui/material/Modal";
 import Pagination from "@mui/material/Pagination";
 import Swal from "sweetalert2";
 import "./Airlines.css";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -20,6 +21,7 @@ const style = {
 };
 
 const Airlines = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [ticketDetails, setTicketDetail] = useState([]);
   const handleOpen = async () => {
@@ -89,6 +91,8 @@ const Airlines = () => {
             title: "success",
             text: "Updated Successfully",
             confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
           });
         }
       });
@@ -108,6 +112,8 @@ const Airlines = () => {
             title: "success",
             text: "Delete Successfully",
             confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
           });
         }
       });
