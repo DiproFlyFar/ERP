@@ -41,6 +41,7 @@ const AllPayment = () => {
         <br></br>
         <select name="payment-method" id="payment-method" style={{ width: "250px", padding: "10px", border: "1px solid #003566", marginRight: "25px", cursor: "pointer" }}  onChange={e => setSelectedOption(e.target.value)}>
 
+          <option value="select-option">Select Payment Method</option>
           <option value="cash">Cash</option>
           <option value="cheque">Cheque</option>
           <option value="bankTransfer">Bank Transfer</option>

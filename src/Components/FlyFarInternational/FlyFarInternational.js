@@ -28,7 +28,7 @@ const FlyFarInternational = () => {
       >
         Fly Far International
       </Typography>
-      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+      <Box sx={{ display: "block", flexWrap: "wrap" }}>
         {" "}
         <Box
           sx={{
@@ -47,7 +47,7 @@ const FlyFarInternational = () => {
             Home
           </NavLink>
           <NavLink
-            to="/manageWebsite/www.flyfarint.com/control/"
+            to="/manageWebsite/www.flyfarint.com/control/apipage"
             className={({ isActive }) => (isActive ? "active-link" : "link")}
           >
             Control
