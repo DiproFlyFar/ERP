@@ -48,21 +48,20 @@ const GroupFare = ({ isLoading, data }) => {
         <Box sx={style}>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Box sx={{ width: "100%" }}>
-
               <AddGroupFare />
             </Box>
 
           </Box>
-       
 
-            <Button sx={{
-              background: "#70A5D8",width:"20%", color: "white", marginTop: "20px", borderRadius: "0", "&:hover": {
-                background: "#70A5D8"
-              }
-            }}>Submit</Button>
-        
 
-         
+          <Button sx={{
+            background: "#70A5D8", width: "20%", color: "white", marginTop: "20px", borderRadius: "0", "&:hover": {
+              background: "#70A5D8"
+            }
+          }}>Submit</Button>
+
+
+
         </Box>
       </Modal>
 

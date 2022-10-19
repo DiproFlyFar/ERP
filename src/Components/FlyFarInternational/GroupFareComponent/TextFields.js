@@ -2,9 +2,11 @@ import { Grid, TextField } from '@mui/material';
 import React from 'react';
 import { DarkmodeEnable } from '../../../App';
 
-const TextFields = () => {
+const TextFields = ({textFields}) => {
     const { isDark } = React.useContext(DarkmodeEnable);
-    const textFields = ["Departure From", "Departure Time", "Arival To", "Arival Time", "Career Name", "Flight Number", "Seat", "Bag", "Base Price",]
+ 
+    const textFieldsOneStop = ["Departure From", "Departure Time", "Arival To", "Arival Time", "Career Name", "Flight Number", "Seat", "Bag", "Base Price","Tax"]
+    const textFieldsTwoStop = ["Departure From", "Departure Time", "Arival To", "Arival Time", "Career Name", "Flight Number", "Seat", "Bag", "Base Price","Tax"]
 
     return (
 

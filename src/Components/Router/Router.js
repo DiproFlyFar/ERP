@@ -69,6 +69,9 @@ import Airlines from "../FlyFarInternational/ControlPage/Airlines/Airlines";
 import CurrencyPage from "../FlyFarInternational/ControlPage/CurrencyPage/CurrencyPage";
 import AllGroupFares from "../FlyFarInternational/GroupFareComponent/AllGroupFares";
 import TextFields from "../FlyFarInternational/GroupFareComponent/TextFields";
+import NonStop from "../FlyFarInternational/GroupFareComponent/NonStop";
+import OneStop from "../FlyFarInternational/GroupFareComponent/OneStop";
+import TwoStop from "../FlyFarInternational/GroupFareComponent/TwoStop";
  const Router = () => {
   return (
     <Box>
@@ -262,9 +265,9 @@ import TextFields from "../FlyFarInternational/GroupFareComponent/TextFields";
                 path="/manageWebsite/www.flyfarint.com/groupFare"
                 element={<AllGroupFares />}
               >
-                <Route path="/manageWebsite/www.flyfarint.com/groupFare/nonStop" element={<TextFields/>} ></Route>
-                <Route path="/manageWebsite/www.flyfarint.com/groupFare/oneStop" element={<TextFields/>}></Route>
-                <Route path="/manageWebsite/www.flyfarint.com/groupFare/twoStop" element={<TextFields/>}></Route>
+                <Route path="/manageWebsite/www.flyfarint.com/groupFare/nonStop" element={<NonStop/>} ></Route>
+                <Route path="/manageWebsite/www.flyfarint.com/groupFare/oneStop" element={<OneStop/>}></Route>
+                <Route path="/manageWebsite/www.flyfarint.com/groupFare/twoStop" element={<TwoStop/>}></Route>
               </Route>
 
 
