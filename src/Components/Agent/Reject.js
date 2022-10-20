@@ -8,6 +8,8 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import { DarkmodeEnable } from "../../App";
 
 const style = {
@@ -24,11 +26,13 @@ const style = {
 };
 
 const Reject = () => {
+  const navigate = useNavigate();
   const { isDark } = React.useContext(DarkmodeEnable);
 
   const [open, setOpen] = React.useState(false);
 
   const [agentData, setAgentData] = useState([]);
+  const [agenId, setAgenId] = useState("");
 
   const handleOpen = async (agentId) => {
     setOpen(true);
@@ -36,7 +40,10 @@ const Reject = () => {
       `https://api.flyfarint.com/v.1.0.0/Admin/Agent/allAgent.php?agentId=${agentId}`
     )
       .then((res) => res.json())
-      .then((data) => setAgentData(data[0]));
+      .then((data) => {
+        setAgentData(data[0]);
+        setAgenId(agentId);
+      });
   };
 
   const handleClose = () => setOpen(false);
@@ -67,8 +74,53 @@ const Reject = () => {
 
   //   pending data filter
   const rejectDataFilter = mainAgentData.filter((pendingData) => {
-    return pendingData.status === "reject";
+    return pendingData.status === "rejected";
   });
+
+  // activate functionality handle
+  const handleActive = () => {
+    fetch(
+      `https://api.flyfarint.com/v.1.0.0/Admin/Agent/approved.php?agentId=${agenId}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.action === "success") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Activate Successfully",
+            confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
+          });
+        }
+      });
+
+    handleClose(false);
+  };
+
+  //   handle  delete
+  const deleteAgent = () => {
+    fetch(
+      `https://api.flyfarint.com/v.1.0.0/Admin/Agent/delete.php?agentId=${agenId}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === "success") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Updated Successfully",
+            confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
+          });
+        }
+      });
+    handleClose(false);
+  };
 
   return (
     <Box style={{ width: "97%" }}>
@@ -238,7 +290,7 @@ const Reject = () => {
                       },
                     }}
                   >
-                    Reject
+                    Approve
                   </Button>
                   <Button
                     sx={{

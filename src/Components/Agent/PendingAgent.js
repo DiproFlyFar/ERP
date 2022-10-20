@@ -77,8 +77,54 @@ const PendingAgent = () => {
     return pendingData.status === "pending";
   });
 
-  //   handle delete
+  // activate functionality handle
+  const handleActive = () => {
+    fetch(
+      `https://api.flyfarint.com/v.1.0.0/Admin/Agent/approved.php?agentId=${agenId}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.action === "success") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Activate Successfully",
+            confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
+          });
+        }
+      });
 
+    handleClose(false);
+  };
+
+  // reject functionality handle
+
+  const handleReject = () => {
+    fetch(
+      `https://api.flyfarint.com/v.1.0.0/Admin/Agent/rejected.php?agentId=${agenId}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.action === "success") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Reject Successfully",
+            confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
+          });
+        }
+      });
+
+    handleClose(false);
+  };
+
+  //   handle  delete
   const deleteAgent = () => {
     fetch(
       `https://api.flyfarint.com/v.1.0.0/Admin/Agent/delete.php?agentId=${agenId}`
@@ -267,8 +313,9 @@ const PendingAgent = () => {
                         background: "#003566",
                       },
                     }}
+                    onClick={() => handleActive()}
                   >
-                    Active
+                    Approve
                   </Button>
                   <Button
                     sx={{
@@ -280,6 +327,7 @@ const PendingAgent = () => {
                         background: "#DC143C",
                       },
                     }}
+                    onClick={() => handleReject()}
                   >
                     Reject
                   </Button>

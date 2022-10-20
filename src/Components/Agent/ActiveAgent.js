@@ -76,6 +76,29 @@ const ActiveAgent = () => {
     return pendingData.status === "active";
   });
 
+  // deactivate functionality handle
+  const handleDeactivate = () => {
+    fetch(
+      `https://api.flyfarint.com/v.1.0.0/Admin/Agent/deactive.php?agentId=${agenId}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.action === "success") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Deactivate Successfully",
+            confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
+          });
+        }
+      });
+
+    handleClose(false);
+  };
+
   //   handle delete
 
   const deleteAgent = () => {
@@ -266,8 +289,9 @@ const ActiveAgent = () => {
                         background: "#DC143C",
                       },
                     }}
+                    onClick={() => handleDeactivate()}
                   >
-                    Reject
+                    Deactivate
                   </Button>
                   <Button
                     sx={{

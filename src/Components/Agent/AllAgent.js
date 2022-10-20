@@ -9,6 +9,8 @@ import {
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { DarkmodeEnable } from "../../App";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import "./Agent.css";
 
 const style = {
@@ -25,11 +27,13 @@ const style = {
 };
 
 const AllAgent = () => {
+  const navigate = useNavigate();
   const { isDark } = React.useContext(DarkmodeEnable);
 
   const [open, setOpen] = React.useState(false);
 
   const [agentData, setAgentData] = useState([]);
+  const [agenId, setAgenId] = useState("");
 
   const handleOpen = async (agentId) => {
     setOpen(true);
@@ -37,7 +41,10 @@ const AllAgent = () => {
       `https://api.flyfarint.com/v.1.0.0/Admin/Agent/allAgent.php?agentId=${agentId}`
     )
       .then((res) => res.json())
-      .then((data) => setAgentData(data[0]));
+      .then((data) => {
+        setAgentData(data[0]);
+        setAgenId(agentId);
+      });
   };
 
   const handleClose = () => setOpen(false);
@@ -65,6 +72,98 @@ const AllAgent = () => {
         setMainAgentData(data);
       });
   }, []);
+
+  // activate functionality handle
+  const handleActive = () => {
+    fetch(
+      `https://api.flyfarint.com/v.1.0.0/Admin/Agent/approved.php?agentId=${agenId}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.action === "success") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Activate Successfully",
+            confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
+          });
+        }
+      });
+
+    handleClose(false);
+  };
+
+  // deactivate functionality handle
+  const handleDeactivate = () => {
+    fetch(
+      `https://api.flyfarint.com/v.1.0.0/Admin/Agent/deactive.php?agentId=${agenId}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.action === "success") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Deactivate Successfully",
+            confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
+          });
+        }
+      });
+
+    handleClose(false);
+  };
+
+  // reject functionality handle
+
+  const handleReject = () => {
+    fetch(
+      `https://api.flyfarint.com/v.1.0.0/Admin/Agent/rejected.php?agentId=${agenId}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.action === "success") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Reject Successfully",
+            confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
+          });
+        }
+      });
+
+    handleClose(false);
+  };
+
+  //   handle  delete
+  const deleteAgent = () => {
+    fetch(
+      `https://api.flyfarint.com/v.1.0.0/Admin/Agent/delete.php?agentId=${agenId}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === "success") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Delete Successfully",
+            confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
+          });
+        }
+      });
+    handleClose(false);
+  };
 
   return (
     <Box style={{ width: "97%" }}>
@@ -221,9 +320,11 @@ const AllAgent = () => {
                   {/* <img src={row.companyImage} width="171px" /> */}
                 </Box>
               </Box>
+
+              {/* function handle start here */}
               <Box sx={{ float: "right" }}>
-                {agentData?.status === "pending" ? (
-                  <>
+                {agentData?.status === "active" ? (
+                  <Box>
                     <Button
                       sx={{
                         background: "#DC143C",
@@ -234,6 +335,38 @@ const AllAgent = () => {
                           background: "#003566",
                         },
                       }}
+                      onClick={() => handleDeactivate()}
+                    >
+                      Deactivate
+                    </Button>
+                    <Button
+                      sx={{
+                        background: "#003566",
+                        marginRight: "10px",
+                        color: "white",
+                        borderRadius: "0",
+                        "&:hover": {
+                          background: "#DC143C",
+                        },
+                      }}
+                      onClick={() => deleteAgent()}
+                    >
+                      Delete
+                    </Button>
+                  </Box>
+                ) : agentData?.status === "deactive" ? (
+                  <Box>
+                    <Button
+                      sx={{
+                        background: "#DC143C",
+                        color: "white",
+                        marginRight: "10px",
+                        borderRadius: "0",
+                        "&:hover": {
+                          background: "#003566",
+                        },
+                      }}
+                      onClick={() => handleActive()}
                     >
                       Active
                     </Button>
@@ -247,24 +380,27 @@ const AllAgent = () => {
                           background: "#DC143C",
                         },
                       }}
+                      onClick={() => deleteAgent()}
                     >
-                      Reject
+                      Delete
                     </Button>
+                  </Box>
+                ) : agentData?.status === "pending" ? (
+                  <Box>
                     <Button
                       sx={{
                         background: "#DC143C",
                         color: "white",
+                        marginRight: "10px",
                         borderRadius: "0",
                         "&:hover": {
                           background: "#003566",
                         },
                       }}
+                      onClick={() => handleActive()}
                     >
-                      Delete
+                      Approve
                     </Button>
-                  </>
-                ) : (
-                  <>
                     <Button
                       sx={{
                         background: "#003566",
@@ -275,22 +411,59 @@ const AllAgent = () => {
                           background: "#DC143C",
                         },
                       }}
+                      onClick={() => handleReject()}
                     >
-                      Deactivate
+                      Reject
                     </Button>
+                    <Button
+                      sx={{
+                        background: "#003566",
+                        marginRight: "10px",
+                        color: "white",
+                        borderRadius: "0",
+                        "&:hover": {
+                          background: "#DC143C",
+                        },
+                      }}
+                      onClick={() => deleteAgent()}
+                    >
+                      Delete
+                    </Button>
+                  </Box>
+                ) : agentData?.status === "rejected" ? (
+                  <Box>
                     <Button
                       sx={{
                         background: "#DC143C",
                         color: "white",
+                        marginRight: "10px",
                         borderRadius: "0",
                         "&:hover": {
                           background: "#003566",
                         },
                       }}
+                      onClick={() => handleActive()}
+                    >
+                      Approve
+                    </Button>
+
+                    <Button
+                      sx={{
+                        background: "#003566",
+                        marginRight: "10px",
+                        color: "white",
+                        borderRadius: "0",
+                        "&:hover": {
+                          background: "#DC143C",
+                        },
+                      }}
+                      onClick={() => deleteAgent()}
                     >
                       Delete
                     </Button>
-                  </>
+                  </Box>
+                ) : (
+                  ""
                 )}
               </Box>
             </Box>
