@@ -54,11 +54,11 @@ const GroupFare = ({ isLoading, data }) => {
           </Box>
 
 
-          <Button sx={{
+          {/* <Button sx={{
             background: "#70A5D8", width: "20%", color: "white", marginTop: "20px", borderRadius: "0", "&:hover": {
               background: "#70A5D8"
             }
-          }}>Submit</Button>
+          }}>Submit</Button> */}
 
 
 

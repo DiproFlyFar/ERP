@@ -77,7 +77,7 @@ function Row({ row, arr }) {
                         onClick={() => { }}
                         sx={{ color: `${isDark ? "white" : "#003566"}` }}
                     >
-                        <AlertDialogueForNotification/>
+                        <AlertDialogueForNotification />
                     </IconButton>
                 </TableCell>
             </TableRow>
@@ -105,18 +105,18 @@ function Row({ row, arr }) {
                                 <Typography sx={{ fontSize: "12px", color: "#03566", border: "1px solid #003566", my: "20px", p: "10px" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diam vulputate pharetra, diam ornare ornare. Eu aenean massa viverra cras eget integer lobortis mauris. Fermentum convallis cursus ante nulla senectus erat varius. Ac mauris mattis risus vitae malesuada sit purus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diam vulputate pharetra, diam ornare ornare. Eu aenean massa viverra cras eget integer lobortis mauris. Fermentum convallis cursus ante nulla senectus erat varius. Ac mauris mattis risus vitae malesuada sit purus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diam vulputate pharetra, diam ornare ornare. Eu aenean massa viverra cras eget integer lobortis mauris. Fermentum convallis cursus ante nulla senectus erat varius. Ac mauris mattis risus vitae malesuada sit purus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diam vulputate pharetra, diam ornare ornare. Eu aenean massa viverra cras eget integer lobortis mauris. Fermentum convallis cursus ante nulla senectus erat varius. Ac mauris mattis risus vitae malesuada sit purus.Lorem ipsum dolor sit amet, </Typography>
                             </Box>
                             <Box
-                               
+
                             >
                                 <Button
                                     sx={{
                                         width: "10%",
                                         color: "white",
-                                        borderRadius:"0",
+                                        borderRadius: "0",
                                         backgroundColor: "#003566",
-                                        "&:hover":{
+                                        "&:hover": {
                                             backgroundColor: "#003566",
                                         },
-                                        float:"right"
+                                        float: "right"
 
                                     }}
                                 >
