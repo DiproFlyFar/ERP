@@ -397,7 +397,7 @@ const AllAgent = () => {
                           background: "#003566",
                         },
                       }}
-                      onClick={() => handleActive()}
+                      onClick={() => handleReject()}
                     >
                       Approve
                     </Button>
@@ -411,7 +411,6 @@ const AllAgent = () => {
                           background: "#DC143C",
                         },
                       }}
-                      onClick={() => handleReject()}
                     >
                       Reject
                     </Button>
@@ -430,7 +429,7 @@ const AllAgent = () => {
                       Delete
                     </Button>
                   </Box>
-                ) : agentData?.status === "rejected" ? (
+                ) : agentData?.status === "reject" ? (
                   <Box>
                     <Button
                       sx={{
@@ -442,7 +441,6 @@ const AllAgent = () => {
                           background: "#003566",
                         },
                       }}
-                      onClick={() => handleActive()}
                     >
                       Approve
                     </Button>
