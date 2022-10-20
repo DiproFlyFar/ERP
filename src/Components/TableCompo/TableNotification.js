@@ -9,13 +9,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { DarkmodeEnable } from "../../App";
-import AlertDialog from "../AlertDialogue/AlertDialogue";
+import AlertDialogueForNotification from "../AlertDialogue/AlertDialogueForNotification";
 
 function Row({ row, arr }) {
     const [open, setOpen] = useState(false);
-    const [debitOpen, setDebitOpen] = useState(false);
     const { isDark } = useContext(DarkmodeEnable);
     const properties = Object.keys(row);
     return (
@@ -38,7 +37,6 @@ function Row({ row, arr }) {
                         aria-label="expand row"
                         size="small"
                         onClick={() => {
-                            setDebitOpen(false);
                             setOpen(!open);
                         }}
                         sx={{ color: `${isDark ? "white" : "#003566"}` }}
@@ -55,7 +53,7 @@ function Row({ row, arr }) {
                                     color: `${isDark || open ? "white" : "#003566"}`,
                                 }}
                             >
-                                Update
+                                Cancel
                             </p>
                         ) : (
                             <p
@@ -64,9 +62,9 @@ function Row({ row, arr }) {
                                     textAlign: "center",
                                     width: "100px",
                                     fontSize: "15px",
-                                    background: "#D9D9D9",
+                                    background: "#003566",
                                     fontWeight: "600",
-                                    color: "#003566",
+                                    color: "white",
                                 }}
                             >
                                 Update
@@ -79,7 +77,7 @@ function Row({ row, arr }) {
                         onClick={() => { }}
                         sx={{ color: `${isDark ? "white" : "#003566"}` }}
                     >
-                        <AlertDialog></AlertDialog>
+                        <AlertDialogueForNotification/>
                     </IconButton>
                 </TableCell>
             </TableRow>
@@ -93,7 +91,7 @@ function Row({ row, arr }) {
                     colSpan={7}
                 >
                     <Collapse
-                        in={open || debitOpen}
+                        in={open}
                         timeout="auto"
                         unmountOnExit
                         sx={{ width: "100%", marginBottom: "30px" }}
