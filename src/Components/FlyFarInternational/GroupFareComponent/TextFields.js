@@ -5,7 +5,7 @@ import { DarkmodeEnable } from '../../../App';
 const TextFields = ({textFields}) => {
     const { isDark } = React.useContext(DarkmodeEnable);
  
-    const textFieldsOneStop = ["Departure From", "Departure Time", "Arival To", "Arival Time", "Career Name", "Flight Number", "Seat", "Bag", "Base Price","Tax"]
+
     const textFieldsTwoStop = ["Departure From", "Departure Time", "Arival To", "Arival Time", "Career Name", "Flight Number", "Seat", "Bag", "Base Price","Tax"]
 
     return (
