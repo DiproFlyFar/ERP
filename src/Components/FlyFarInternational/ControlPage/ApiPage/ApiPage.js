@@ -16,8 +16,6 @@ const ApiPage = () => {
       value: active[value] === "1" ? 0 : 1,
     });
 
-    console.log(body);
-
     await fetch(url, {
       method: "POST",
       headers: {
@@ -28,7 +26,7 @@ const ApiPage = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
+        console.log(data);
         if (data.status === "success") {
           setIsLoading((prev) => !prev);
           Swal.fire({
