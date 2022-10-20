@@ -54,11 +54,11 @@ const GroupFare = ({ isLoading, data }) => {
           </Box>
 
 
-          <Button sx={{
+          {/* <Button sx={{
             background: "#70A5D8", width: "20%", color: "white", marginTop: "20px", borderRadius: "0", "&:hover": {
               background: "#70A5D8"
             }
-          }}>Submit</Button>
+          }}>Submit</Button> */}
 
 
 
@@ -117,7 +117,7 @@ const GroupFare = ({ isLoading, data }) => {
           <Typography sx={{ fontSize: "12px", color: "#003566", fontWeight: "600", textAlign: "right" }}>Dubai</Typography>
           <Typography sx={{ fontSize: "14px", color: "#C7C7C7", textAlign: "right" }}>{groupFare.arrTime1}</Typography>
           <Box sx={{ mt: "40%", display: "flex", justifyContent: "right" }}>
-            <span style={{ fontWeight: "600", display: "flex" }}><MdEventSeat style={{ fontSize: "25px", color: "#DC143C", marginRight: "10px" }} /> 9 seats</span>
+            <span style={{ fontWeight: "600", display: "flex" }}><MdEventSeat style={{ fontSize: "25px", color: "#DC143C", marginRight: "10px" }} /> {groupFare.seat} seats</span>
           </Box>
         </Box>
         <Box sx={{ background: "linear-gradient(121.52deg, #5D7F9E 0%, #003566 77.49%)", color: "white", borderRadius: "0px 12px 12px 0px", width: "25%" }} p={3}>
