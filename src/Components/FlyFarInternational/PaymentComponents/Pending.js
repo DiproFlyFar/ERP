@@ -72,47 +72,59 @@ const Pending = () => {
   //  reject handle
   const [open, setOpen] = React.useState(false);
 
-  const handleOpen = () => {
+  const [reason, setReason] = useState("");
+  const [id, setId] = useState("");
+  const [agentId, setAgentId] = useState("");
+  const [action, setAction1] = useState("");
+  const [staffId, setStaffID] = useState("");
+
+  const handleOpen = (id, agentId, actionBy, staffId) => {
+    setId(id);
+    setAgentId(agentId);
+    setAction1(actionBy);
+    setStaffID(staffId);
+
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
 
-  // const rejectHandle = async (id, agentId, actionBy, reason) => {
-  //   let url = `https://api.flyfarint.com/v.1.0.0/Admin/DepositRequest/rejected.php`;
+  const rejectHandle = async () => {
+    let url = `https://api.flyfarint.com/v.1.0.0/Admin/DepositRequest/rejected.php`;
 
-  //   let body = JSON.stringify({
-  //     id: id,
-  //     agentId: agentId,
-  //     actionBy: "actionByRifat",
-  //     reason: "",
-  //   });
+    let body = JSON.stringify({
+      id: id,
+      agentId: agentId,
+      actionBy: action,
+      reason: reason,
+    });
 
-  //   console.log(body);
-  //   await fetch(url, {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "*/*",
-  //       "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-  //     },
-  //     body: body,
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       if (data.status === "success") {
-  //         Swal.fire({
-  //           icon: "success",
-  //           title: "success",
-  //           text: "Delete Successfully",
-  //           confirmButtonText: "ok",
-  //         }).then(function () {
-  //           navigate(0);
-  //         });
-  //       }
-  //     });
-  // };
+    console.log(body);
+    await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: body,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === "success") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Delete Successfully",
+            confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
+          });
+        }
+      });
+  };
 
   return (
     <Box
@@ -181,14 +193,20 @@ const Pending = () => {
                 style={{ color: "green", cursor: "pointer" }}
               />
               <DangerousIcon
-                onClick={handleOpen}
+                onClick={() =>
+                  handleOpen(
+                    data?.id,
+                    data?.agentId,
+                    data?.actionBy,
+                    data?.staffId
+                  )
+                }
                 style={{ color: "red", cursor: "pointer" }}
               />
             </td>
           </tr>
         ))}
       </table>
-
       <Box className="agentModal">
         <Modal
           open={open}
@@ -200,7 +218,19 @@ const Pending = () => {
             sx={{ ...style, width: 600 }}
             style={{ border: "none", borderRadius: "5px" }}
           >
-    
+            <Box className="airlinePnr1" mb={2}>
+              <label>Reason:</label>
+              <input
+                required
+                type="text"
+                placeholder="Enter"
+                name="airlinePnr"
+                onChange={(e) => setReason(e.target.value)}
+              />
+              <Box className="saveBtn1" mt={2}>
+                <button onClick={rejectHandle}>Save</button>
+              </Box>
+            </Box>
           </Box>
         </Modal>
       </Box>
