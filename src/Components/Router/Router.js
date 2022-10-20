@@ -68,10 +68,11 @@ import ApiPage from "../FlyFarInternational/ControlPage/ApiPage/ApiPage";
 import Airlines from "../FlyFarInternational/ControlPage/Airlines/Airlines";
 import CurrencyPage from "../FlyFarInternational/ControlPage/CurrencyPage/CurrencyPage";
 import AllGroupFares from "../FlyFarInternational/GroupFareComponent/AllGroupFares";
- import NonStop from "../FlyFarInternational/GroupFareComponent/NonStop";
+import NonStop from "../FlyFarInternational/GroupFareComponent/NonStop";
 import OneStop from "../FlyFarInternational/GroupFareComponent/OneStop";
 import TwoStop from "../FlyFarInternational/GroupFareComponent/TwoStop";
- const Router = () => {
+import ActiveAgent from "../Agent/ActiveAgent";
+const Router = () => {
   return (
     <Box>
       <BrowserRouter>
@@ -166,6 +167,10 @@ import TwoStop from "../FlyFarInternational/GroupFareComponent/TwoStop";
                 <Route
                   path="/manageWebsite/www.flyfarint.com/agent/pending"
                   element={<PendingAgent></PendingAgent>}
+                ></Route>
+                <Route
+                  path="/manageWebsite/www.flyfarint.com/agent/active"
+                  element={<ActiveAgent></ActiveAgent>}
                 ></Route>
                 <Route
                   path="/manageWebsite/www.flyfarint.com/agent/reject"
@@ -264,11 +269,19 @@ import TwoStop from "../FlyFarInternational/GroupFareComponent/TwoStop";
                 path="/manageWebsite/www.flyfarint.com/groupFare"
                 element={<AllGroupFares />}
               >
-                <Route path="/manageWebsite/www.flyfarint.com/groupFare/nonStop" element={<NonStop/>} ></Route>
-                <Route path="/manageWebsite/www.flyfarint.com/groupFare/oneStop" element={<OneStop/>}></Route>
-                <Route path="/manageWebsite/www.flyfarint.com/groupFare/twoStop" element={<TwoStop/>}></Route>
+                <Route
+                  path="/manageWebsite/www.flyfarint.com/groupFare/nonStop"
+                  element={<NonStop />}
+                ></Route>
+                <Route
+                  path="/manageWebsite/www.flyfarint.com/groupFare/oneStop"
+                  element={<OneStop />}
+                ></Route>
+                <Route
+                  path="/manageWebsite/www.flyfarint.com/groupFare/twoStop"
+                  element={<TwoStop />}
+                ></Route>
               </Route>
-
 
               <Route
                 path="/manageWebsite/www.flyfarint.com/ticketing"

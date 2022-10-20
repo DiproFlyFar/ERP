@@ -28,7 +28,6 @@ const Airlines = () => {
   const handleOpen = async () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -59,46 +58,11 @@ const Airlines = () => {
       });
   }, []);
 
-  //  data POST
+  //  airlines  add  functionality handle here
   const [airlineCode, setAirLineCode] = useState("");
   const [airNameEng, setAirNameEng] = useState("");
   const [airNameBng, setAirNameBng] = useState("");
   const [airCommission, setAirCommission] = useState("");
-
-  //functionality for update modal data
-  //  state for update data
-  const [updateData, setUpdateData] = useState({});
-  const UpdateHandleOpen = async (id) => {
-    setUpdateOpen(true);
-
-    await fetch(
-      `https://api.flyfarint.com/v.1.0.0/Admin/Airlines/all.php?id=${id}`
-    )
-      .then((res) => res.json())
-      .then((data) => setUpdateData(data[0]));
-  };
-
-  const UpdateHandleClose = () => {
-    setUpdateOpen(false);
-  };
-
-  const [modalUpdateData, setModalUpdateData] = useState({
-    code: updateData.code,
-    commission: updateData.commission,
-    name: updateData.name,
-    nameBangla: updateData.nameBangla,
-  });
-
-  const handleModalUpdateData = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setModalUpdateData({
-      ...modalUpdateData,
-      [name]: value,
-    });
-  };
-
-  console.log(modalUpdateData);
 
   const airDataPost = async (e) => {
     let url = "https://api.flyfarint.com/v.1.0.0/Admin/Airlines/add.php";
@@ -108,9 +72,6 @@ const Airlines = () => {
       nameBangla: airNameBng,
       commission: airCommission,
     });
-
-    console.log(body);
-
     await fetch(url, {
       method: "POST",
       headers: {
@@ -135,7 +96,7 @@ const Airlines = () => {
     handleClose(false);
   };
 
-  // delete request
+  // delete functionality handle here
   const deleteRequest = (id) => {
     fetch(
       `https://api.flyfarint.com/v.1.0.0/Admin/Airlines/delete.php?id=${id}`
@@ -155,11 +116,64 @@ const Airlines = () => {
       });
   };
 
-  // update  airlines data
+  // update function handle here
 
   const [Updateopen, setUpdateOpen] = React.useState(false);
+  const [updateAirCode, setUpdateAirCode] = useState("");
+  const [updateAirNameEng, setUpdateAirNameEng] = useState("");
+  const [updateAirNameBng, setUpdateAirNameBng] = useState("");
+  const [updateAirCom, setUpdateAirCom] = useState("");
+  const [airId, setAirId] = useState("");
 
-  console.log(updateData);
+  const UpdateHandleOpen = async (id) => {
+    setUpdateOpen(true);
+    fetch(`https://api.flyfarint.com/v.1.0.0/Admin/Airlines/all.php?id=${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUpdateAirCode(data[0].code);
+        setUpdateAirNameEng(data[0].name);
+        setUpdateAirNameBng(data[0].nameBangla);
+        setUpdateAirCom(data[0].commission);
+        setAirId(id);
+      });
+  };
+
+  const updateDataSave = async () => {
+    let url = `https://api.flyfarint.com/v.1.0.0/Admin/Airlines/edit.php?id=${airId}`;
+    let body = JSON.stringify({
+      code: updateAirCode,
+      nameEnglish: updateAirNameEng,
+      nameBangla: updateAirNameBng,
+      commission: updateAirCom,
+    });
+    await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "*/*",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: body,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === "sucess") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Updated Successfully",
+            confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
+          });
+        }
+      });
+    UpdateHandleClose(false);
+  };
+
+  const UpdateHandleClose = () => {
+    setUpdateOpen(false);
+  };
 
   return (
     <Box style={{ width: "97%" }}>
@@ -371,10 +385,10 @@ const Airlines = () => {
                   }}
                   required
                   type="text"
-                  name="code"
-                  placeholder="AA"
-                  value={modalUpdateData?.code}
-                  onChange={(e) => handleModalUpdateData(e)}
+                  value={updateAirCode}
+                  onChange={(e) => {
+                    setUpdateAirCode(e.target.value);
+                  }}
                 />
               </Box>
               <Box className="airlinePnr1" mb={2}>
@@ -388,10 +402,10 @@ const Airlines = () => {
                   }}
                   required
                   type="text"
-                  placeholder="American Airlines"
-                  name="name"
-                  value={modalUpdateData?.name}
-                  onChange={(e) => handleModalUpdateData(e)}
+                  value={updateAirNameEng}
+                  onChange={(e) => {
+                    setUpdateAirNameEng(e.target.value);
+                  }}
                 />
               </Box>
               <Box className="airlinePnr1" mb={2}>
@@ -404,10 +418,10 @@ const Airlines = () => {
                   }}
                   required
                   type="text"
-                  placeholder="আমেরিকান এয়ারলাইন্স"
-                  name="nameBangla"
-                  value={modalUpdateData?.nameBangla}
-                  onChange={(e) => handleModalUpdateData(e)}
+                  value={updateAirNameBng}
+                  onChange={(e) => {
+                    setUpdateAirNameBng(e.target.value);
+                  }}
                 />
               </Box>
               <Box className="airlinePnr1" mb={2}>
@@ -420,16 +434,16 @@ const Airlines = () => {
                   }}
                   required
                   type="text"
-                  placeholder="commission"
-                  name="commission"
-                  value={modalUpdateData.commission}
-                  onChange={(e) => handleModalUpdateData(e)}
+                  value={updateAirCom}
+                  onChange={(e) => {
+                    setUpdateAirCom(e.target.value);
+                  }}
                 />
               </Box>
 
               <Box className="balance-transaction">
                 <Box className="saveBtn1" mt={2}>
-                  <button onClick={airDataPost}>Update</button>
+                  <button onClick={updateDataSave}>Update</button>
                 </Box>
               </Box>
             </Box>

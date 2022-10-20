@@ -36,7 +36,7 @@ const Agent = () => {
             Pending
           </NavLink>
           <NavLink
-            to="/manageWebsite/www.flyfarint.com/agent/pending"
+            to="/manageWebsite/www.flyfarint.com/agent/active"
             className={({ isActive }) =>
               isActive ? "selected_tab" : "not_selected_tab"
             }
