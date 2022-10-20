@@ -24,6 +24,8 @@ const Pending = () => {
   const navigate = useNavigate();
   const { isDark } = React.useContext(DarkmodeEnable);
   const [paymentData, setPaymentData] = useState([]);
+
+  console.log(paymentData);
   useEffect(() => {
     fetch(
       `https://api.flyfarint.com/v.1.0.0/Admin/DepositRequest/allRequest.php?status=Pending`
@@ -44,7 +46,7 @@ const Pending = () => {
       staffId: staffId,
     });
 
-    console.log(body);
+
     await fetch(url, {
       method: "POST",
       headers: {

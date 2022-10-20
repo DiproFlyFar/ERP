@@ -1,4 +1,11 @@
-import { Box, Grid, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  Button,
+  Pagination,
+  Stack,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Hold.css";
@@ -6,12 +13,28 @@ import "./Hold.css";
 const All = () => {
   const navigate = useNavigate();
   const [holdData, setHoldData] = useState([]);
+  const [mainAgentData, setMainAgentData] = useState([]);
+  //  pagination handle
+  const [pageCount, setPageCount] = useState(0);
+  const [page, setPage] = useState(1);
+  let size = 15;
+  // Handle a page change.
+  const handlePageChange = (event, value) => {
+    setPage(value);
+    setMainAgentData(holdData.slice((value - 1) * size, value * size));
+  };
 
   useEffect(() => {
     const url = "https://api.flyfarint.com/v.1.0.0/Admin/Booking/all.php?all";
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setHoldData(data));
+      .then((data) => {
+        const count = data.length;
+        const pageNumber = Math.ceil(count / size);
+        setPageCount(pageNumber);
+        setHoldData(data);
+        setMainAgentData(data);
+      });
   }, []);
 
   const [agentData, setAgentData] = useState([]);
@@ -22,6 +45,8 @@ const All = () => {
       .then((res) => res.json())
       .then((data) => setAgentData(data[0]));
   }, [holdData[0]?.agentId]);
+
+  // pagination
 
   //  send to booking hold page
   const sendToQueuesDetails = (
@@ -113,7 +138,7 @@ const All = () => {
             <th>Call</th>
           </tr>
 
-          {holdData.map((data) => (
+          {mainAgentData?.slice(0, size).map((data) => (
             <tr>
               <td>{data?.bookingId}</td>
               <td>{data?.status}</td>
@@ -172,6 +197,23 @@ const All = () => {
             </tr>
           ))}
         </table>
+      </Box>
+
+      <Box
+        sx={{
+          width: "100%",
+          my: 3,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Stack spacing={2}>
+          <Pagination
+            count={pageCount}
+            onChange={handlePageChange}
+            shape="rounded"
+          />
+        </Stack>
       </Box>
     </Box>
   );

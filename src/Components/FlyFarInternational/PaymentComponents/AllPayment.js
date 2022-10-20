@@ -5,6 +5,8 @@ import { DarkmodeEnable } from "../../../App";
 const AllPayment = () => {
   const { isDark } = React.useContext(DarkmodeEnable);
   const [paymentData, setPaymentData] = useState([]);
+  console.log(paymentData);
+
   useEffect(() => {
     fetch(
       `https://api.flyfarint.com/v.1.0.0/Admin/DepositRequest/allRequest.php?all`
