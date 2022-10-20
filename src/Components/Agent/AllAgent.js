@@ -88,7 +88,7 @@ const AllAgent = () => {
               <td>{data?.phone}</td>
               <td>{data?.status}</td>
               <td>{data?.company}</td>
-              <td></td>
+              <td>{data?.balanced}</td>
               <td>
                 <div>
                   <Button
@@ -222,31 +222,76 @@ const AllAgent = () => {
                 </Box>
               </Box>
               <Box sx={{ float: "right" }}>
-                <Button
-                  sx={{
-                    background: "#003566",
-                    color: "white",
-                    marginRight: "10px",
-                    borderRadius: "0",
-                    "&:hover": {
-                      background: "#003566",
-                    },
-                  }}
-                >
-                  Hold
-                </Button>
-                <Button
-                  sx={{
-                    background: "#DC143C",
-                    color: "white",
-                    borderRadius: "0",
-                    "&:hover": {
-                      background: "#DC143C",
-                    },
-                  }}
-                >
-                  Delete
-                </Button>
+                {agentData?.status === "pending" ? (
+                  <>
+                    <Button
+                      sx={{
+                        background: "#DC143C",
+                        color: "white",
+                        marginRight: "10px",
+                        borderRadius: "0",
+                        "&:hover": {
+                          background: "#003566",
+                        },
+                      }}
+                    >
+                      Active
+                    </Button>
+                    <Button
+                      sx={{
+                        background: "#003566",
+                        marginRight: "10px",
+                        color: "white",
+                        borderRadius: "0",
+                        "&:hover": {
+                          background: "#DC143C",
+                        },
+                      }}
+                    >
+                      Reject
+                    </Button>
+                    <Button
+                      sx={{
+                        background: "#DC143C",
+                        color: "white",
+                        borderRadius: "0",
+                        "&:hover": {
+                          background: "#003566",
+                        },
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      sx={{
+                        background: "#003566",
+                        marginRight: "10px",
+                        color: "white",
+                        borderRadius: "0",
+                        "&:hover": {
+                          background: "#DC143C",
+                        },
+                      }}
+                    >
+                      Deactivate
+                    </Button>
+                    <Button
+                      sx={{
+                        background: "#DC143C",
+                        color: "white",
+                        borderRadius: "0",
+                        "&:hover": {
+                          background: "#003566",
+                        },
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </>
+                )}
               </Box>
             </Box>
           </Modal>
