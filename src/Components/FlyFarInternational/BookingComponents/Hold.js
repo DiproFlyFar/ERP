@@ -1,18 +1,42 @@
-import { Box, Grid, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  Button,
+  Pagination,
+  Stack,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 import "./Hold.css";
 
 const Hold = () => {
   const navigate = useNavigate();
   const [holdData, setHoldData] = useState([]);
+  const [mainAgentData, setMainAgentData] = useState([]);
+  //  pagination handle
+  const [pageCount, setPageCount] = useState(0);
+  const [page, setPage] = useState(1);
+  let size = 15;
+  // Handle a page change.
+  const handlePageChange = (event, value) => {
+    setPage(value);
+    setMainAgentData(holdData.slice((value - 1) * size, value * size));
+  };
 
   useEffect(() => {
     const url =
       "https://api.flyfarint.com/v.1.0.0/Admin/Booking/all.php?status=Hold";
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setHoldData(data));
+      .then((data) => {
+        const count = data.length;
+        const pageNumber = Math.ceil(count / size);
+        setPageCount(pageNumber);
+        setHoldData(data);
+        setMainAgentData(data);
+      });
   }, []);
 
   const [agentData, setAgentData] = useState([]);
@@ -114,7 +138,7 @@ const Hold = () => {
             <th>Call</th>
           </tr>
 
-          {holdData.map(
+          {mainAgentData?.slice(0, size).map(
             (data) =>
               data.status === "Hold" && (
                 <tr>
@@ -176,6 +200,23 @@ const Hold = () => {
               )
           )}
         </table>
+      </Box>
+
+      <Box
+        sx={{
+          width: "100%",
+          my: 3,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Stack spacing={2}>
+          <Pagination
+            count={pageCount}
+            onChange={handlePageChange}
+            shape="rounded"
+          />
+        </Stack>
       </Box>
     </Box>
   );
