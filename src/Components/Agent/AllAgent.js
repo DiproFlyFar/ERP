@@ -8,9 +8,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { DarkmodeEnable } from "../../App";
-import TableCompoWithOperation from "../TableCompo/TableCompoWithOperation";
 import "./Agent.css";
 
 const style = {
@@ -32,7 +30,6 @@ const AllAgent = () => {
   const [open, setOpen] = React.useState(false);
 
   const [agentData, setAgentData] = useState([]);
-  console.log(agentData);
 
   const handleOpen = async (agentId) => {
     setOpen(true);
@@ -46,11 +43,27 @@ const AllAgent = () => {
   const handleClose = () => setOpen(false);
 
   const [bookingData, setBookingData] = useState([]);
+  const [mainAgentData, setMainAgentData] = useState([]);
+  //  pagination handle
+  const [pageCount, setPageCount] = useState(0);
+  const [page, setPage] = useState(1);
+  let size = 10;
+  // Handle a page change.
+  const handlePageChange = (event, value) => {
+    setPage(value);
+    setMainAgentData(bookingData.slice((value - 1) * size, value * size));
+  };
 
   useEffect(() => {
     fetch("https://api.flyfarint.com/v.1.0.0/Admin/Agent/allAgent.php?all")
       .then((res) => res.json())
-      .then((data) => setBookingData(data));
+      .then((data) => {
+        const count = data.length;
+        const pageNumber = Math.ceil(count / size);
+        setPageCount(pageNumber);
+        setBookingData(data);
+        setMainAgentData(data);
+      });
   }, []);
 
   return (
@@ -67,7 +80,7 @@ const AllAgent = () => {
             <th>Balance</th>
             <th>Operation</th>
           </tr>
-          {bookingData.map((data) => (
+          {mainAgentData?.slice(0, size).map((data) => (
             <tr>
               <td>{data?.agentId}</td>
               <td>{data?.name}</td>
@@ -237,6 +250,23 @@ const AllAgent = () => {
               </Box>
             </Box>
           </Modal>
+        </Box>
+
+        <Box
+          sx={{
+            width: "100%",
+            my: 3,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Stack spacing={2}>
+            <Pagination
+              count={pageCount}
+              onChange={handlePageChange}
+              shape="rounded"
+            />
+          </Stack>
         </Box>
       </Box>
     </Box>
