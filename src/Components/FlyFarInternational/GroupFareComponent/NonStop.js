@@ -1,21 +1,34 @@
 import { Button, Grid, MenuItem, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import flightData from '../../../flightData';
-
+import "./NonStop.css"
 
 import { DarkmodeEnable } from '../../../App';
 import Select from 'react-select';
 
-const NonStop = ({ textFields }) => {
+const customStyles = {
+    control: base => ({
+        ...base,
+        fontSize: 12,
+        height: 35,
+        minHeight: 35,
+        borderRadius: 0
+
+
+    })
+};
+const NonStop = () => {
     const { isDark } = React.useContext(DarkmodeEnable);
     const [isLoading, setIsLoading] = useState(false);
 
     const [nonStopData, setNonStopData] = useState([])
-    const { register, handleSubmit } = useForm();
+    const { control, register, handleSubmit } = useForm();
     const onSubmit = data => setNonStopData(data);
+    // const onSubmit = data=>console.log(data)
+
 
     const nestedData = {
         segment: nonStopData.segment,
@@ -26,8 +39,8 @@ const NonStop = ({ textFields }) => {
         seat: nonStopData.seat,
         segments: [
             {
-                depFrom: nonStopData.depFrom,
-                arrTo: nonStopData.arrTo,
+                depFrom: nonStopData?.departureFrom?.name,
+                arrTo: nonStopData?.arrivalTo?.name,
                 depTime: nonStopData.depTime,
                 arrTime: nonStopData.arrTime,
                 flightNumber: nonStopData.flightNumber
@@ -36,57 +49,29 @@ const NonStop = ({ textFields }) => {
     }
 
 
-    const [departure, setDeparture] = React.useState('EUR');
+    // const [departure, setDeparture] = React.useState('EUR');
 
-    const handleChange = (event) => {
-        setDeparture(event.target.value);
-    };
+    // const handleChange = (event) => {
+    //     setDeparture(event.target.value);
+    // };
 
-    // useEffect(() => {
-    //     setIsLoading(true)
-    //     fetch(
-    //         "https://api.flyfarint.com/v.1.0.0/Admin/GroupFare/addFare.php", {
-    //         method: "POST",
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(nestedData)
-    //     }
-    //     ).then((res) => res.json()).then(d => {
-    //         setIsLoading(false)
-    //         console.log(d)
-    //     })
-    // }, [nestedData])
-    const defaultValue = "Select Method";
-    const ops = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
-    ];
-    const [selectedOption, setSelectedOption] = useState(null);
-    const handleTypeSelect = e => {
-        setSelectedOption(e.value);
-    };
-    const fdata = [{
-        code: "QNT",
-        name: "Niteroi Intl Airport",
-        Address: "Niteroi,BRAZIL",
-    },
-    {
-        code: "QQX",
-        name: "Bath Rail Service",
-        Address: "Bath,UNITED KINGDOM",
-    },
-    {
-        code: "QQY",
-        name: "York Rail Station",
-        Address: "York,UNITED KINGDOM",
-    },
-    {
-        code: "QRO",
-        name: "Queretaro Intl Airport",
-        Address: "Queretaro,MEXICO",
-    },]
+    useEffect(() => {
+        // setIsLoading(true)
+        fetch(
+            "https://api.flyfarint.com/v.1.0.0/Admin/GroupFare/addFare.php", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(nestedData)
+        }
+        ).then((res) => res.json()).then(d => {
+            setIsLoading(false)
+            console.log(d)
+        })
+    }, [])
+
+
     return (
 
 
@@ -94,7 +79,7 @@ const NonStop = ({ textFields }) => {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <Grid container spacing={2} mt={3}>
-
+                    {console.log(nestedData)}
                     <Grid item xs={3}>
                         <TextField {...register("segment")}
                             placeholder="Segment"
@@ -108,28 +93,19 @@ const NonStop = ({ textFields }) => {
                             }} />
                     </Grid>
                     <Grid item xs={3}>
-                        {/* 
-                        <select name="payment-method" id="payment-method" style={{ padding: "10px", border: "1px solid #003566", marginRight: "25px", cursor: "pointer" }} onChange={e => setSelectedOption(e.target.value)}> */}
 
-                        {/* <option value="select-option">Select Payment Method</option> */}
-                        {/* {
-                                flightData.map(option =><Select options={}></Select>)
-                            } */}
-
-
-                        <Select
-                            options={ops}
-                            onChange={handleTypeSelect}
-                            value={ops.filter(function (option) {
-                                return option.value === selectedOption;
-                            })}
-                            label="Single select"
+                        <Controller
+                            name="departureFrom"
+                            placeholder="Departure From"
+                            style={customStyles}
+                            control={control}
+                            className="departureSelect"
+                            render={({ field }) => <Select
+                                {...field}
+                                options={flightData}
+                                getOptionLabel={(option) => option.name}
+                            />}
                         />
-
-
-
-
-                        {/* </select> */}
 
                     </Grid>
                     <Grid item xs={3}>
@@ -144,15 +120,17 @@ const NonStop = ({ textFields }) => {
                             }} />
                     </Grid>
                     <Grid item xs={3}>
-                        <TextField {...register("arrTo")}
-                            placeholder="Arival To"
-                            id="outlined-basic"
-                            variant="outlined"
-                            size="small"
-                            className={`${isDark ? "input_dark" : "input_light"}`}
-                            sx={{
-                                "& fieldset": { border: "none" },
-                            }} />
+                        <Controller
+                            name="arrivalTo"
+                            control={control}
+                            placeholder="Arrival To"
+                            render={({ field }) => <Select
+                                {...field}
+                                options={flightData}
+                                getOptionLabel={(option) => option.name}
+
+                            />}
+                        />
                     </Grid>
                     <Grid item xs={3}>
                         <TextField {...register("arrTime")}
