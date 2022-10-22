@@ -9,6 +9,26 @@ import "./NonStop.css"
 import { DarkmodeEnable } from '../../../App';
 import Select from 'react-select';
 
+
+const styles = {
+    menuList: (base) => ({
+        ...base,
+
+        "::-webkit-scrollbar": {
+            width: "5px",
+
+        },
+        "::-webkit-scrollbar-track": {
+            background: "red",
+
+        },
+        "::-webkit-scrollbar-thumb": {
+            background: "#888"
+        },
+
+    })
+}
+
 const NonStop = () => {
     const { isDark } = React.useContext(DarkmodeEnable);
     const [isLoading, setIsLoading] = useState(false);
@@ -38,11 +58,6 @@ const NonStop = () => {
     }
 
 
-    // const [departure, setDeparture] = React.useState('EUR');
-
-    // const handleChange = (event) => {
-    //     setDeparture(event.target.value);
-    // };
 
     useEffect(() => {
         // setIsLoading(true)
@@ -69,18 +84,7 @@ const NonStop = () => {
 
                 <Grid container spacing={2} mt={3}>
                     {console.log(nestedData)}
-                    {/* <Grid item xs={3}>
-                        <TextField {...register("segment")}
-                            placeholder="Segment"
-                            value="1"
-                            id="outlined-basic"
-                            variant="outlined"
-                            size="small"
-                            className={`${isDark ? "input_dark" : "input_light"}`}
-                            sx={{
-                                "& fieldset": { border: "none" },
-                            }} />
-                    </Grid> */}
+
                     <Grid item xs={4.5}>
 
                         <Controller
@@ -90,6 +94,7 @@ const NonStop = () => {
                             control={control}
 
                             render={({ field }) => <Select
+                                styles={styles}
                                 className="departureSelect"
                                 {...field}
                                 options={flightData}
@@ -117,6 +122,7 @@ const NonStop = () => {
 
                             placeholder="Arrival To"
                             render={({ field }) => <Select
+                                styles={styles}
                                 className="departureSelect"
                                 {...field}
                                 options={flightData}

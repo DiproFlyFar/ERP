@@ -96,13 +96,13 @@ const GroupFare = ({ isLoading, data }) => {
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mt: "20px" }}>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <FaCircle style={{ color: "#C7C7C7" }} />
-                <FaPlane style={{ color: "#003566", fontSize: "25px" }} className={`${groupFare.segment==="3"?"plane":groupFare.segment==="2"?"oneStopPlane":"noStopPlane"}`}></FaPlane>
+                <FaPlane style={{ color: "#003566", fontSize: "25px" }} className={`${groupFare.segment === "3" ? "plane" : groupFare.segment === "2" ? "oneStopPlane" : "noStopPlane"}`}></FaPlane>
               </div>
               {
-                groupFare.segment==="3"? <>     <Box sx={{ background: "#DC143C", height: "10px", width: "35px", borderRadius: "5px", }}></Box>
-                  <Box sx={{ background: "#DC143C", height: "10px", width: "35px", borderRadius: "5px", }}></Box></> : groupFare.segment==="2" ? <><Box sx={{ background: "#DC143C", height: "10px", width: "35px", borderRadius: "5px", }}></Box></> : null
+                groupFare.segment === "3" ? <>     <Box sx={{ background: "#DC143C", height: "10px", width: "35px", borderRadius: "5px", }}></Box>
+                  <Box sx={{ background: "#DC143C", height: "10px", width: "35px", borderRadius: "5px", }}></Box></> : groupFare.segment === "2" ? <><Box sx={{ background: "#DC143C", height: "10px", width: "35px", borderRadius: "5px", }}></Box></> : null
               }
- 
+
               <FaCircle style={{ color: "#C7C7C7" }} />
 
             </Box>
