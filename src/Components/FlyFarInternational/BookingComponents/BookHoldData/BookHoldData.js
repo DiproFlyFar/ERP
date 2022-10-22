@@ -93,6 +93,7 @@ const BookHoldData = () => {
 
   // fetch flight data
   const [flightData, setFlightData] = useState([]);
+  console.log(flightData);
 
   useEffect(() => {
     fetch(
@@ -193,7 +194,7 @@ const BookHoldData = () => {
                     md={3}
                   >
                     <Box>
-                      <button>{statusType}</button>
+                      <button style={{ width: "207px" }}>{statusType}</button>
                     </Box>
                   </Grid>
                 </Grid>
@@ -626,11 +627,104 @@ const BookHoldData = () => {
                         </Accordion>
                       ))}
                     </div>
+                  ) : flightData?.isTicketed === false ? (
+                    <div>
+                      {flightData?.travelers.map((flightData) => (
+                        <Accordion
+                          expanded={expanded === "panel1"}
+                          onChange={handleChange("panel1")}
+                          style={{
+                            border: "1px solid #C4C4C4",
+                            boxShadow: "none",
+                            overflow: "hidden",
+                          }}
+                        >
+                          <AccordionSummary
+                            aria-controls="panel1d-content"
+                            id="panel1d-header"
+                            sx={{
+                              borderBottom: "1px solid #DEDEDE",
+                              height: "0px !important",
+                            }}
+                          >
+                            <Box
+                              display={"flex"}
+                              justifyContent={"space-between"}
+                              width={"100%"}
+                            >
+                              <h5
+                                style={{
+                                  color: "#003566",
+                                  fontWeight: "500",
+                                  fontSize: "13px",
+                                }}
+                              >
+                                {flightData?.givenName} {flightData?.surname}
+                              </h5>
+                            </Box>
+                          </AccordionSummary>
+
+                          <AccordionDetails>
+                            <Grid container spacing={2}>
+                              <Grid item xs={4} md={2}>
+                                <h5>Nationality</h5>
+                                <h6>
+                                  {flightData?.identityDocuments
+                                    ? flightData?.identityDocuments[0]
+                                        ?.issuingCountryCode
+                                    : "Domestic"}
+                                </h6>
+                              </Grid>
+
+                              <Grid item xs={4} md={2.5}>
+                                <h5>Date of Birth</h5>
+                                <h6>
+                                  {flightData?.identityDocuments
+                                    ? flightData?.identityDocuments[0]
+                                        ?.birthDate
+                                    : "Domestic"}
+                                </h6>
+                              </Grid>
+
+                              <Grid item xs={4} md={2.5}>
+                                <h5>Gender</h5>
+                                <h6>
+                                  {" "}
+                                  {flightData?.identityDocuments
+                                    ? flightData?.identityDocuments[0]?.gender
+                                    : "Domestic"}
+                                </h6>
+                              </Grid>
+
+                              <Grid item xs={6} md={2.5}>
+                                <h5>Passport Number</h5>
+                                <h6>
+                                  {flightData?.identityDocuments
+                                    ? flightData?.identityDocuments[0]
+                                        ?.documentNumber
+                                    : "Domestic"}
+                                </h6>
+                              </Grid>
+                              <Grid item xs={6} md={2.5}>
+                                <h5>Passport Expire Date</h5>
+                                <h6>
+                                  {flightData?.identityDocuments
+                                    ? flightData?.identityDocuments[0]
+                                        ?.expiryDate
+                                    : "Domestic"}
+                                </h6>
+                              </Grid>
+                            </Grid>
+                          </AccordionDetails>
+                        </Accordion>
+                      ))}
+                    </div>
                   ) : (
                     "wait please ...................."
                   )}
                 </Box>
               )}
+
               {/* For Flyhub */}
               {gds === "FlyHub" && (
                 <Box mt={5} className="queue-detail-passenger-detail">

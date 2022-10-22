@@ -9,6 +9,8 @@ import {
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { DarkmodeEnable } from "../../App";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import "./Agent.css";
 
 const style = {
@@ -25,11 +27,12 @@ const style = {
 };
 
 const PendingAgent = () => {
+  const navigate = useNavigate();
   const { isDark } = React.useContext(DarkmodeEnable);
-
   const [open, setOpen] = React.useState(false);
 
   const [agentData, setAgentData] = useState([]);
+  const [agenId, setAgenId] = useState("");
 
   const handleOpen = async (agentId) => {
     setOpen(true);
@@ -37,7 +40,10 @@ const PendingAgent = () => {
       `https://api.flyfarint.com/v.1.0.0/Admin/Agent/allAgent.php?agentId=${agentId}`
     )
       .then((res) => res.json())
-      .then((data) => setAgentData(data[0]));
+      .then((data) => {
+        setAgentData(data[0]);
+        setAgenId(agentId);
+      });
   };
 
   const handleClose = () => setOpen(false);
@@ -70,6 +76,75 @@ const PendingAgent = () => {
   const pendingDataFilter = mainAgentData.filter((pendingData) => {
     return pendingData.status === "pending";
   });
+
+  // activate functionality handle
+  const handleActive = () => {
+    fetch(
+      `https://api.flyfarint.com/v.1.0.0/Admin/Agent/approved.php?agentId=${agenId}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.action === "success") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Activate Successfully",
+            confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
+          });
+        }
+      });
+
+    handleClose(false);
+  };
+
+  // reject functionality handle
+
+  const handleReject = () => {
+    fetch(
+      `https://api.flyfarint.com/v.1.0.0/Admin/Agent/rejected.php?agentId=${agenId}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.action === "success") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Reject Successfully",
+            confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
+          });
+        }
+      });
+
+    handleClose(false);
+  };
+
+  //   handle  delete
+  const deleteAgent = () => {
+    fetch(
+      `https://api.flyfarint.com/v.1.0.0/Admin/Agent/delete.php?agentId=${agenId}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === "success") {
+          Swal.fire({
+            icon: "success",
+            title: "success",
+            text: "Updated Successfully",
+            confirmButtonText: "ok",
+          }).then(function () {
+            navigate(0);
+          });
+        }
+      });
+    handleClose(false);
+  };
 
   return (
     <Box style={{ width: "97%" }}>
@@ -238,8 +313,9 @@ const PendingAgent = () => {
                         background: "#003566",
                       },
                     }}
+                    onClick={() => handleActive()}
                   >
-                    Active
+                    Approve
                   </Button>
                   <Button
                     sx={{
@@ -251,6 +327,7 @@ const PendingAgent = () => {
                         background: "#DC143C",
                       },
                     }}
+                    onClick={() => handleReject()}
                   >
                     Reject
                   </Button>
@@ -263,6 +340,7 @@ const PendingAgent = () => {
                         background: "#003566",
                       },
                     }}
+                    onClick={deleteAgent}
                   >
                     Delete
                   </Button>
