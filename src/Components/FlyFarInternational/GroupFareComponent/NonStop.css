@@ -1,10 +1,11 @@
- .departureSelect{
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
+*:focus {
+    outline: none !important;
+}
+
+.departureSelect {
+    outline: none !important;
     border-radius: 0;
-    background-color: white;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    font-size: 10px;
- }
+    border: 1px solid #003566;
+    width: 100%;
+    font-size: 12px;
+}
