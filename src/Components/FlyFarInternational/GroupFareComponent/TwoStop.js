@@ -20,7 +20,7 @@ const TwoStop = () => {
 
 
     const nestedData = {
-        segment: 2,
+        segment: 3,
         career: nonStopData.career,
         basePrice: nonStopData.basePrice,
         taxes: nonStopData.taxes,
@@ -64,6 +64,7 @@ const TwoStop = () => {
             <Grid container spacing={2} mt={3}>
                     {console.log(nestedData)}
                  
+                 {/* Segment One */}
                     <Grid item xs={4.5}>
 
                         <Controller
@@ -200,13 +201,14 @@ const TwoStop = () => {
 
 
                 </Grid>
+                {/* Segment 2 */}
             <Grid container spacing={2} mt={3}>
                     {console.log(nestedData)}
                  
                     <Grid item xs={4.5}>
 
                         <Controller
-                            name="departureFrom"
+                            name="departureFromS2"
                             placeholder="Departure From"
 
                             control={control}
@@ -234,7 +236,7 @@ const TwoStop = () => {
 
                     <Grid item xs={4.5}>
                         <Controller
-                            name="arrivalTo"
+                            name="arrivalToS2"
                             control={control}
 
                             placeholder="Arrival To"
@@ -339,13 +341,14 @@ const TwoStop = () => {
 
 
                 </Grid>
+                {/* Segment 3 */}
                 <Grid container spacing={2} mt={3}>
                     {console.log(nestedData)}
                  
                     <Grid item xs={4.5}>
 
                         <Controller
-                            name="departureFrom"
+                            name="departureFromS3"
                             placeholder="Departure From"
 
                             control={control}
@@ -373,7 +376,7 @@ const TwoStop = () => {
 
                     <Grid item xs={4.5}>
                         <Controller
-                            name="arrivalTo"
+                            name="arrivalToS3"
                             control={control}
 
                             placeholder="Arrival To"
