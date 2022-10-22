@@ -16,7 +16,6 @@ const SearchList = () => {
   }, []);
 
   //  search part handle
-
   const handelSearchItems = (e) => {
     let searchInput = e.target.value;
 
