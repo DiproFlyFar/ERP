@@ -82,7 +82,7 @@ const NonStop = () => {
             setIsLoading(false)
             console.log(d)
         })
-    }, [])
+    }, [nestedData])
 
 
     return (

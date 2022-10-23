@@ -40,7 +40,7 @@ const GroupFare = ({ isLoading, data, refetch }) => {
       console.log(data)
       refetch()
     })
-    console.log(`https://api.flyfarint.com/v.1.0.0/Admin/GroupFare/deleteFare.php/groupId=${id}`)
+   
   }
 
   return <Box sx={{ width: "95%", my: "70px" }}>
@@ -88,7 +88,7 @@ const GroupFare = ({ isLoading, data, refetch }) => {
 
 
     </Box>
-    <Box> <Link to="/manageWebsite/www.flyfarint.com/addGroupFareRoute/nonStop">Add Group Fare</Link></Box>
+  
     {
       isLoading && <Loader></Loader>
     }
@@ -140,7 +140,7 @@ const GroupFare = ({ isLoading, data, refetch }) => {
         </Box>
         <Box p={3} sx={{ width: "20%" }}>
           <Typography sx={{ fontWeight: "600", textAlign: "right" }}>{groupFare.arrival3 ? groupFare.arrival3 : groupFare.arrival2 ? groupFare.arrival2 : groupFare.arrival1} - 19:30</Typography>
-          <Typography sx={{ fontSize: "12px", color: "#003566", fontWeight: "600", textAlign: "right" }}>Dubai</Typography>
+          {/* <Typography sx={{ fontSize: "12px", color: "#003566", fontWeight: "600", textAlign: "right" }}>Dubai</Typography> */}
           <Typography sx={{ fontSize: "14px", color: "#C7C7C7", textAlign: "right" }}>{groupFare.arrTime1}</Typography>
           <Box sx={{ mt: "40%", display: "flex", justifyContent: "right" }}>
             <span style={{ fontWeight: "600", display: "flex" }}><MdEventSeat style={{ fontSize: "25px", color: "#DC143C", marginRight: "10px" }} /> {groupFare.seat} seats</span>
