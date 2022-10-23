@@ -201,7 +201,24 @@ const DashboardMain = () => {
                     </ListItemButton>
                   </Box>
                 </NavLink>
-
+                <NavLink
+                  to="/manageWebsite"
+                  className={`${
+                    isDark ? "link_style_dark" : "link_style_light"
+                  }`}
+                >
+                  {" "}
+                  <Box
+                    mb={1}
+                    className={`${
+                      isDark ? styles.selectTabDark : styles.selectTabLight
+                    }`}
+                  >
+                    <ListItemButton>
+                      <Typography>Manage Website</Typography>
+                    </ListItemButton>
+                  </Box>
+                </NavLink>
                 <Box
                   mb={1}
                   className={`${

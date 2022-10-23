@@ -38,6 +38,10 @@ const NonStop = () => {
     const onSubmit = data => setNonStopData(data);
     // const onSubmit = data=>console.log(data)
 
+    const [career,setCareer] = useState([]);
+    useEffect(()=>{
+        
+    },[])
 
     const nestedData = {
         segment: 1,
