@@ -51,11 +51,19 @@ const GroupFare = ({ isLoading, data, refetch }) => {
         }
       }}>Add Group Fare</Button></Link> */}
 
-      <Button sx={{
+      {/* <Button sx={{
         background: "#70A5D8", marginBottom: "20px", color: "white", borderRadius: "0", "&:hover": {
           background: "#70A5D8"
         }
-      }} onClick={handleOpen}>Add Group Fare</Button>
+      }} onClick={handleOpen}>Add Group Fare</Button> */}
+      <Box> <Link to="/manageWebsite/www.flyfarint.com/addGroupFareRoute/nonStop" >
+
+        <Button sx={{
+          background: "#70A5D8", marginBottom: "20px", color: "white", borderRadius: "0", "&:hover": {
+            background: "#70A5D8"
+          }
+        }}> Add Group Fare</Button>
+      </Link></Box>
       {/* <Modal
         open={open}
         onClose={handleClose}
@@ -141,7 +149,7 @@ const GroupFare = ({ isLoading, data, refetch }) => {
         <Box sx={{ background: "linear-gradient(121.52deg, #5D7F9E 0%, #003566 77.49%)", color: "white", borderRadius: "0px 12px 12px 0px", width: "25%" }} p={3}>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography sx={{ fontSize: "15px" }}>Total Price</Typography>
-            <Typography sx={{ fontSize: "15px" }}>{groupFare?.BasePrice}</Typography>
+            <Typography sx={{ fontSize: "15px" }}>{parseFloat(groupFare?.BasePrice) + parseFloat(groupFare?.Taxes)}</Typography>
           </Box>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography sx={{ fontSize: "13px" }}>Base Price</Typography>
