@@ -38,14 +38,17 @@ const NonStop = () => {
     const onSubmit = data => setNonStopData(data);
     // const onSubmit = data=>console.log(data)
 
-    const [career,setCareer] = useState([]);
-    useEffect(()=>{
-        
-    },[])
+
+    // Career Name Fetching
+    const [career, setCareer] = useState([]);
+    useEffect(() => {
+        fetch("https://api.flyfarint.com/v.1.0.0/AirMaterials/Airlines.php?all").then(res => res.json()).then(data => setCareer(data))
+    }, [])
+
 
     const nestedData = {
         segment: 1,
-        career: nonStopData.career,
+        career: nonStopData?.careerName?.code,
         basePrice: nonStopData.basePrice,
         taxes: nonStopData.taxes,
         bags: nonStopData.bags,
@@ -56,7 +59,9 @@ const NonStop = () => {
                 arrTo: nonStopData?.arrivalTo?.name,
                 depTime: nonStopData.depTime,
                 arrTime: nonStopData.arrTime,
-                flightNumber: nonStopData.flightNumber
+                flightNumber: nonStopData.flightNumber,
+                address: nonStopData?.departureFrom?.Address
+
             }
         ]
     }
@@ -77,7 +82,7 @@ const NonStop = () => {
             setIsLoading(false)
             console.log(d)
         })
-    }, [nonStopData])
+    }, [])
 
 
     return (
@@ -89,7 +94,7 @@ const NonStop = () => {
                 <Grid container spacing={2} mt={3}>
                     {console.log(nestedData)}
 
-                    <Grid item xs={4.5}>
+                    <Grid item xs={4}>
 
                         <Controller
                             name="departureFrom"
@@ -113,13 +118,14 @@ const NonStop = () => {
                                         <Typography sx={{ fontWeight: "bold", color: "gray", fontSize: "12px" }}>{option.code}</Typography>
                                     </Box>
                                 }}
+                                // getOptionLabel={option=>option.name}
                                 getOptionValue={option => option.Address}
                             />}
                         />
 
                     </Grid>
 
-                    <Grid item xs={4.5}>
+                    <Grid item xs={4}>
                         <Controller
                             name="arrivalTo"
                             control={control}
@@ -141,7 +147,7 @@ const NonStop = () => {
                                         <Typography sx={{ fontWeight: "bold", color: "gray", fontSize: "12px" }}>{option.code}</Typography>
                                     </Box>
                                 }}
-                                getOptionValue={option => option.Address}
+                                getOptionValue={option => option?.Address}
                             />}
                         />
                     </Grid>
@@ -167,16 +173,35 @@ const NonStop = () => {
                                 "& fieldset": { border: "none" },
                             }} />
                     </Grid>
+
                     <Grid item xs={3}>
-                        <TextField {...register("career")}
-                            placeholder="Career Name"
-                            id="outlined-basic"
-                            variant="outlined"
-                            size="small"
-                            className={`${isDark ? "input_dark" : "input_light"}`}
-                            sx={{
-                                "& fieldset": { border: "none" },
-                            }} />
+                        <Controller
+                            name="careerName"
+                            placeholder="Departure From"
+
+                            control={control}
+
+                            render={({ field }) => <Select
+                                styles={styles}
+                                className="departureSelect"
+                                {...field}
+                                options={career}
+                                placeholder="Career Name"
+                                getOptionLabel={(option) => {
+                                    return <Box sx={{ display: "flex", justifyContent: "space-between" }} key={option?.code}>
+                                        <Box>
+                                            <Typography sx={{ fontSize: "13px", color: "#003566", fontWeight: "600" }}> {option?.name}</Typography>
+
+                                        </Box>
+
+                                        <Typography sx={{ fontWeight: "bold", color: "gray", fontSize: "12px" }}>{option?.code}</Typography>
+                                    </Box>
+                                }}
+
+                                getOptionValue={option => option.name}
+                            />}
+                        />
+
                     </Grid>
                     <Grid item xs={3}>
                         <TextField {...register("flightNumber")}

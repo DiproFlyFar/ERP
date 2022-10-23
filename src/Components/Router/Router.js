@@ -72,6 +72,7 @@ import NonStop from "../FlyFarInternational/GroupFareComponent/NonStop";
 import OneStop from "../FlyFarInternational/GroupFareComponent/OneStop";
 import TwoStop from "../FlyFarInternational/GroupFareComponent/TwoStop";
 import ActiveAgent from "../Agent/ActiveAgent";
+import AddGroupFareRoute from "../../GroupFareRoutes/AddGroupFareRoute";
 const Router = () => {
   return (
     <Box>
@@ -269,7 +270,7 @@ const Router = () => {
                 path="/manageWebsite/www.flyfarint.com/groupFare"
                 element={<AllGroupFares />}
               >
-                <Route
+                {/* <Route
                   path="/manageWebsite/www.flyfarint.com/groupFare/nonStop"
                   element={<NonStop />}
                 ></Route>
@@ -280,7 +281,7 @@ const Router = () => {
                 <Route
                   path="/manageWebsite/www.flyfarint.com/groupFare/twoStop"
                   element={<TwoStop />}
-                ></Route>
+                ></Route> */}
               </Route>
 
               <Route
@@ -304,9 +305,24 @@ const Router = () => {
                 path="/manageWebsite/www.flyfarint.com/notifications"
                 element={<Notification />}
               ></Route>
+                <Route path="/manageWebsite/www.flyfarint.com/addGroupFareRoute" element={<AddGroupFareRoute/>}>
+                <Route
+                  path="/manageWebsite/www.flyfarint.com/addGroupFareRoute/nonStop"
+                  element={<NonStop />}
+                ></Route>
+                <Route
+                  path="/manageWebsite/www.flyfarint.com/addGroupFareRoute/oneStop"
+                  element={<OneStop />}
+                ></Route>
+                <Route
+                  path="/manageWebsite/www.flyfarint.com/addGroupFareRoute/twoStop"
+                  element={<TwoStop />}
+                ></Route>
+                </Route>
             </Route>
+          
           </Route>
-
+     
           <Route path="/login" element={<Login />}></Route>
         </Routes>
       </BrowserRouter>

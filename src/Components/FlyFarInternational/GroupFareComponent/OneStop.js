@@ -39,21 +39,21 @@ const OneStop = () => {
 
 
     
-    useEffect(() => {
-        // setIsLoading(true)
-        fetch(
-            "https://api.flyfarint.com/v.1.0.0/Admin/GroupFare/addFare.php", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(nestedData)
-        }
-        ).then((res) => res.json()).then(d => {
-            setIsLoading(false)
-            console.log(d)
-        })
-    }, [nonStopData])
+    // useEffect(() => {
+    //     // setIsLoading(true)
+    //     fetch(
+    //         "https://api.flyfarint.com/v.1.0.0/Admin/GroupFare/addFare.php", {
+    //         method: "POST",
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(nestedData)
+    //     }
+    //     ).then((res) => res.json()).then(d => {
+    //         setIsLoading(false)
+    //         console.log(d)
+    //     })
+    // }, [nonStopData])
 
 
     return (

@@ -8,7 +8,7 @@ const Flags = ({ code }) => {
         fetch(`https://api.flyfarint.com/v.1.0.0/AirMaterials/Airlines.php?search=${code}`).then(res => res.json()).then(data => setFlag(data))
     }, {})
 
-    console.log("Code is",code)
+  
     return (
         <Box>
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center",width:"120%" }}>
