@@ -40,7 +40,7 @@ const GroupFare = ({ isLoading, data, refetch }) => {
       console.log(data)
       refetch()
     })
-   
+
   }
 
   return <Box sx={{ width: "95%", my: "70px" }}>
@@ -88,7 +88,7 @@ const GroupFare = ({ isLoading, data, refetch }) => {
 
 
     </Box>
-  
+
     {
       isLoading && <Loader></Loader>
     }
