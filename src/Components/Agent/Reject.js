@@ -79,6 +79,7 @@ const Reject = () => {
 
   // activate functionality handle
   const handleActive = () => {
+
     fetch(
       `https://api.flyfarint.com/v.1.0.0/Admin/Agent/approved.php?agentId=${agenId}`
     )
@@ -289,6 +290,7 @@ const Reject = () => {
                         background: "#DC143C",
                       },
                     }}
+                    onClick={handleActive}
                   >
                     Approve
                   </Button>

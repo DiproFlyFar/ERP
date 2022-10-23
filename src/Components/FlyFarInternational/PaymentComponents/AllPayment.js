@@ -1,11 +1,19 @@
-import { Box, TableCell, TableRow } from "@mui/material";
+import { Box, TableCell, TableRow, Pagination,Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { DarkmodeEnable } from "../../../App";
 
 const AllPayment = () => {
   const { isDark } = React.useContext(DarkmodeEnable);
   const [paymentData, setPaymentData] = useState([]);
-  console.log(paymentData);
+
+  // pagination state declare
+
+  const [pageCount, setPageCount]=useState(0)
+  const [page, setPage]=useState(1)
+  let size=10;
+
+
+
 
   useEffect(() => {
     fetch(
