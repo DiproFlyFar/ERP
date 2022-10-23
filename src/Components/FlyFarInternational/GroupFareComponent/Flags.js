@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 
@@ -8,7 +9,12 @@ const Flags = ({ code }) => {
     }, {})
     return (
         <Box>
-            {flag[0]?.name}
+            <Box sx={{display:"flex"}}>
+            <img src={`https://tbbd-flight.s3.ap-southeast-1.amazonaws.com/airlines-logo/${code}.png`} style={{width:"50px"}}/>
+            <Typography>  {flag[0]?.name}</Typography>
+            </Box>
+          
+          
         </Box>
     );
 };
