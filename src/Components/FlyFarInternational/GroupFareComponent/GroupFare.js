@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Modal, Paper, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaPlane, FaCircle } from "react-icons/fa";
 import { MdLuggage, MdEventSeat } from "react-icons/md";
@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { DarkmodeEnable } from "../../../App";
 import AddGroupFare from "./AddGroupFare";
 import "./GroupFare.css"
+import Flags from "./Flags";
 const style = {
   position: "absolute",
   top: "50%",
@@ -24,6 +25,10 @@ const GroupFare = ({ isLoading, data }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+
+
+
 
   return <Box sx={{ width: "85%", my: "70px" }}>
     <Box sx={{ display: "flex", justifyContent: "right" }}>
@@ -75,7 +80,11 @@ const GroupFare = ({ isLoading, data }) => {
         <Box sx={{ display: "flex", width: "25%" }} p={3} >
           <Typography sx={{ fontSize: "12px", border: "1px solid #238800", borderRadius: "50%", height: "70px", width: "70px", padding: "10px", textAlign: "center", color: "#FF0000" }}>Fly Emirates</Typography>
           <Box sx={{ ml: "10px" }}>
-            <Typography sx={{ fontSize: "17px", color: "#FF0000", fontWeight: "600", }}>Fly Emirates</Typography>
+            {
+              
+            }
+            
+            <Typography sx={{ fontSize: "17px", color: "#FF0000", fontWeight: "600", }}> <Flags code={groupFare.career}/></Typography>
             <Typography color="#003566" sx={{ fontSize: "12px", fontWeight: "550" }}>EMA380</Typography>
           </Box>
         </Box>
