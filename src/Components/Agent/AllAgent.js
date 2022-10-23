@@ -55,6 +55,7 @@ const AllAgent = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(1);
   let size = 10;
+
   // Handle a page change.
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -397,7 +398,7 @@ const AllAgent = () => {
                           background: "#003566",
                         },
                       }}
-                      onClick={() => handleReject()}
+                      onClick={() => handleActive()}
                     >
                       Approve
                     </Button>
@@ -411,6 +412,7 @@ const AllAgent = () => {
                           background: "#DC143C",
                         },
                       }}
+                      onClick={() => handleReject()}
                     >
                       Reject
                     </Button>
@@ -441,6 +443,7 @@ const AllAgent = () => {
                           background: "#003566",
                         },
                       }}
+                      onClick={() => handleActive()}
                     >
                       Approve
                     </Button>

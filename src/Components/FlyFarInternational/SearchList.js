@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Pagination, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "./SearchList.css";
 
@@ -6,10 +6,25 @@ const SearchList = () => {
   //  data fetch from search history api
   const [searchData, setSearchData] = useState([]);
   const [shortValues, setShortValue] = useState([]);
+
+  //  pagination handle
+  const [pageCount, setPageCount] = useState(0);
+  const [page, setPage] = useState(1);
+  let size = 10;
+
+  // Handle a page change.
+  const handlePageChange = (event, value) => {
+    setPage(value);
+    setShortValue(searchData.slice((value - 1) * size, value * size));
+  };
+
   useEffect(() => {
     fetch(`https://api.flyfarint.com/v.1.0.0/Admin/SearchHistory/all.php?all`)
       .then((res) => res.json())
       .then((data) => {
+        const count = data.length;
+        const pageNumber = Math.ceil(count / size);
+        setPageCount(pageNumber);
         setShortValue(data);
         setSearchData(data);
       });
@@ -72,7 +87,7 @@ const SearchList = () => {
           </tr>
         </thead>
         <tbody>
-          {shortValues.map((searchValue) => (
+          {shortValues.slice(0, size).map((searchValue) => (
             <tr>
               <td>{searchValue?.searchId}</td>
               <td>{searchValue?.company}</td>
@@ -90,6 +105,23 @@ const SearchList = () => {
           ))}
         </tbody>
       </table>
+
+      <Box
+        sx={{
+          width: "100%",
+          my: 3,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Stack spacing={2}>
+          <Pagination
+            count={pageCount}
+            onChange={handlePageChange}
+            shape="rounded"
+          />
+        </Stack>
+      </Box>
     </Box>
   );
 };

@@ -66,12 +66,14 @@ const Airlines = () => {
 
   const airDataPost = async (e) => {
     let url = "https://api.flyfarint.com/v.1.0.0/Admin/Airlines/add.php";
+
     let body = JSON.stringify({
       code: airlineCode,
       nameEnglish: airNameEng,
       nameBangla: airNameBng,
       commission: airCommission,
     });
+    
     await fetch(url, {
       method: "POST",
       headers: {
